@@ -1,0 +1,53 @@
+{
+  "name": "party-dresses-landing",
+  "version": "1.0.0",
+  "description": "A landing page showcasing party dresses with a focus on styles and designs.",
+  "main": "src/pages/index.tsx",
+  "scripts": {
+    "dev": "next dev",
+    "build": "npx prisma generate && next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "nextjs",
+    "tailwindcss",
+    "party dresses",
+    "landing page"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@auth/prisma-adapter": "^2.10.0",
+    "@prisma/client": "^6.14.0",
+    "@vercel/analytics": "^1.5.0",
+    "busboy": "^1.6.0",
+    "cloudinary": "^2.7.0",
+    "flowbite-react": "^0.12.7",
+    "formidable": "^3.5.4",
+    "next": "latest",
+    "next-auth": "^4.24.11",
+    "nodemailer": "^6.10.1",
+    "prisma": "^6.14.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-icons": "^5.5.0",
+    "react-swipeable": "^7.0.2",
+    "resend": "^6.0.1",
+    "swr": "^2.3.6",
+    "tailwind-scrollbar-hide": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/busboy": "^1.5.4",
+    "@types/formidable": "^3.4.5",
+    "@types/node": "24.2.0",
+    "@types/react": "19.1.9",
+    "@types/uuid": "^10.0.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "latest"
+  }
+}

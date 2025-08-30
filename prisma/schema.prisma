@@ -1,0 +1,285 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model User {
+  id                String    @id @default(cuid())
+  name              String?
+  email             String?   @unique
+  emailVerified     DateTime?
+  image             String?
+  role              String?   @default("USER")
+  accounts          Account[]
+  sessions          Session[]
+  site              Site?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Relações com os novos modelos
+  tasksAuthored     Task[]    @relation("TaskAuthor")
+  tasksAssigned     Task[]    @relation("TaskAssignee")
+  filesUploaded     File[]
+  messagesSent      Message[]
+  commentsAuthored  Comment[] @relation("CommentAuthor") // NOVO: Comentários feitos pelo usuário
+}
+
+model VerificationToken {
+  id         Int      @id @default(autoincrement())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([identifier, token])
+}
+
+model Menu {
+  id      Int     @id @default(1)
+  logoUrl String?
+  links   Json
+}
+
+model Banner {
+  id      Int   @id @default(1)
+  banners Json
+}
+
+model HomepageSection {
+  id        String    @id @default(cuid())
+  type      String
+  order     Int
+  content   Json
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model Testimonial {
+  id        String    @id @default(cuid())
+  name      String
+  type      String
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model FAQ {
+  id        String    @id @default(cuid())
+  pergunta  String
+  resposta  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model Colecao {
+  id          String        @id @default(cuid())
+  title       String
+  subtitle    String?
+  description String?
+  bgcolor     String?
+  buttonText  String?
+  buttonUrl   String?
+  items       ColecaoItem[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  deletedAt   DateTime?
+  order       Int?
+}
+
+model ColecaoItem {
+  id          String    @id @default(cuid())
+  productMark String
+  productModel String
+  cor         String
+  img         String
+  slug        String    @unique
+  colecao     Colecao   @relation(fields: [colecaoId], references: [id], onDelete: Cascade)
+  colecaoId   String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+  size        String?
+  price       Int?
+  price_card  Int?
+  like        Int?
+  view        Int?
+}
+
+model Site {
+  id                   String    @id @default(cuid())
+  userId               String    @unique
+  user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tag_google_ads       String?
+  tag_google_analytics String?
+  tag_meta             String?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String?
+  createdAt DateTime @default(now())
+}
+
+// Modelos para o sistema de gestão da Curva Engenharia
+
+enum TaskStatus {
+  PENDENTE
+  EM_ANDAMENTO
+  CONCLUIDA
+}
+
+model Task {
+  id           String      @id @default(cuid())
+  title        String
+  description  String?
+  status       TaskStatus  @default(PENDENTE)
+  priority     Int         @default(0)
+  dueDate      DateTime?
+
+  author       User        @relation("TaskAuthor", fields: [authorId], references: [id])
+  authorId     String
+
+  assignedTo   User        @relation("TaskAssignee", fields: [assignedToId], references: [id])
+  assignedToId String
+
+  files        File[]
+  comments     Comment[]   // Array de comentários para esta tarefa
+
+  // NOVO: Relacionamento opcional com Projetos
+  projeto      Projetos?   @relation(fields: [projetoId], references: [id])
+  projetoId    String?     // O ? torna o campo opcional
+
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  deletedAt    DateTime?
+}
+
+// Modelo para Comentários em Tarefas
+model Comment {
+  id        String    @id @default(cuid())
+  message   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  author    User      @relation("CommentAuthor", fields: [authorId], references: [id])
+  authorId  String
+
+  task      Task      @relation(fields: [taskId], references: [id])
+  taskId    String
+
+  viewedBy  String[]  @default([]) // Array de IDs de usuários que visualizaram o comentário
+}
+
+model File {
+  id           String    @id @default(cuid())
+  url          String    // URL do arquivo na Cloudinary
+  filename     String    // Nome original do arquivo
+  mimetype     String    // Tipo do arquivo (ex: 'application/pdf')
+
+  // Relacionamento com o usuário que fez o upload
+  uploadedBy   User      @relation(fields: [uploadedById], references: [id])
+  uploadedById String
+
+  // Relacionamento com a tarefa à qual o arquivo pertence (opcional)
+  task         Task?     @relation(fields: [taskId], references: [id])
+  taskId       String?
+
+  // NOVO: Relacionamento com o projeto ao qual o arquivo pertence (opcional)
+  projeto      Projetos? @relation(fields: [projetoId], references: [id]) // Use 'Projetos' conforme seu arquivo 'projetos.ts'
+  projetoId    String?
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Message {
+  id        String    @id @default(cuid())
+  content   String
+
+  // Relacionamento com o autor da mensagem
+  sender    User      @relation(fields: [senderId], references: [id])
+  senderId  String
+
+  createdAt DateTime  @default(now())
+}
+
+model Projetos {
+  id          String        @id @default(uuid())
+  title       String
+  subtitle    String?
+  description String?
+  order       Int           @default(0)
+  publico     Boolean       @default(true) // NOVO: Campo para definir se o projeto é público
+  items       ProjetoFoto[] // Define a relação com as fotos
+  tasks       Task[]        // NOVO: Relação com as tarefas que pertencem a este projeto
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  files     File[] // Um projeto pode ter muitos arquivos
+}
+
+model ProjetoFoto {
+  id          String    @id @default(uuid())
+  local       String
+  tipo        String
+  detalhes    String?
+  img         String
+  projetoId   String
+  projeto     Projetos  @relation(fields: [projetoId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Contact {
+  id                String    @id @default(uuid())
+  name              String
+  email             String
+  phone             String?
+  serviceOfInterest String?
+  message           String
+  createdAt         DateTime  @default(now())
+}

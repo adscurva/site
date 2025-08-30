@@ -1,0 +1,43 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Next.js
+.next/
+out/
+.vercel/
+dist/
+
+# Env
+.env*
+!.env.example
+
+# Logs
+logs
+*.log
+*.csv
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build
+build/
+coverage/
+*.tsbuildinfo
+
+# Public/uploads (se gerar arquivos temporários)
+public/uploads/
+
+# Misc
+*.local
+*.swp
+*.swo
+*.tgz
+
+/src/generated/prisma

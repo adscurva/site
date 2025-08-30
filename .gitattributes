@@ -1,0 +1,19 @@
+# Define o padrão de quebra de linha para LF em todos os arquivos de texto
+* text=auto eol=lf
+# Garante que arquivos de texto específicos permaneçam como LF
+*.js text eol=lf
+*.json text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.sql text eol=lf
+*.prisma text eol=lf
+# Indica que arquivos de imagens são binários e não devem ser alterados
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary

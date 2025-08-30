@@ -1,0 +1,743 @@
+{
+  "colecoes": [
+    {
+      "id": "cmehdx2nh0000lf04a5n95ytc",
+      "title": "Vestidos Azuis",
+      "subtitle": "Tons que transmitem elegância e serenidade",
+      "description": "Os vestidos azuis são perfeitos para quem deseja um look sofisticado, seja para eventos diurnos ou noturnos.\n\nDo azul claro ao marinho, escolha o tom que mais combina com você.\n\n",
+      "bgcolor": "bg-primary",
+      "buttonText": "Solicitar Catálogo de Vestidos Azuis",
+      "buttonUrl": "https://wa.me//5591985810208?text=Olá! Gostaria do Catálogo de Vestidos Azuis",
+      "items": [
+        {
+          "id": "cmehdx2nk0001lf04h8kwnyms",
+          "productMark": "Zibeline",
+          "productModel": "Ombro só/Busto Drapeado",
+          "cor": "Azul",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755538515/dresses/xyghlf0t06vqoswkboqc.jpg",
+          "slug": "zibeline-ombro-sbusto-drapeado-azul",
+          "colecaoId": "cmehdx2nh0000lf04a5n95ytc"
+        },
+        {
+          "id": "cmeheb1xb0001l604apubldn9",
+          "productMark": "Tule com Brilho",
+          "productModel": "Corset/Transparência",
+          "cor": "Azul",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755538515/dresses/q0nwnb2uh5upywvy47gt.jpg",
+          "slug": "tule-com-brilho-corsettransparncia-azul",
+          "colecaoId": "cmehdx2nh0000lf04a5n95ytc"
+        },
+        {
+          "id": "cmeheb1xc0003l604sxexe0u2",
+          "productMark": "Zibeline",
+          "productModel": "Tomara que Caia",
+          "cor": "Azul",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755538516/dresses/tcphqqbzwu6szqwtew0d.jpg",
+          "slug": "zibeline-tomara-que-caia-azul",
+          "colecaoId": "cmehdx2nh0000lf04a5n95ytc"
+        },
+        {
+          "id": "cmeheb1xc0005l6044td03fhm",
+          "productMark": "Fios de Lurex",
+          "productModel": "Busto Trançado",
+          "cor": "Azul",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755538515/dresses/bswdir921c6puydixtda.jpg",
+          "slug": "fios-de-lurex-busto-tranado-azul",
+          "colecaoId": "cmehdx2nh0000lf04a5n95ytc"
+        },
+        {
+          "id": "cmeheb1xc0007l6047nsg8n51",
+          "productMark": "Fios de Lurex",
+          "productModel": "Manga",
+          "cor": "Azul",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755538515/dresses/ngjlclwmobuacbdbtqq3.jpg",
+          "slug": "fios-de-lurex-manga-azul",
+          "colecaoId": "cmehdx2nh0000lf04a5n95ytc"
+        },
+        {
+          "id": "cmeheb1xc0009l60474wf526j",
+          "productMark": "Zibeline",
+          "productModel": "Sereia/Laços",
+          "cor": "Azul",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755538516/dresses/yroxz3uogxepw2vj16mc.jpg",
+          "slug": "zibeline-sereialaos-azul",
+          "colecaoId": "cmehdx2nh0000lf04a5n95ytc"
+        },
+        {
+          "id": "cmeheb1xc000bl604n4hu3uw5",
+          "productMark": "Crepe Satin",
+          "productModel": "Tomara que Caia/Drapeado",
+          "cor": "Azul",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755538515/dresses/wk118b62vkejzhuiodwh.jpg",
+          "slug": "crepe-satin-tomara-que-caiadrapeado-azul",
+          "colecaoId": "cmehdx2nh0000lf04a5n95ytc"
+        },
+        {
+          "id": "cmeheb1xc000dl604zr5jd467",
+          "productMark": "Malha Jersey",
+          "productModel": "Sereia 44 Alça 3 Pontes",
+          "cor": "Azul",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755538515/dresses/jkthyyczz9bstob6c0dz.jpg",
+          "slug": "malha-jersey-sereia-44-ala-3-pontes-azul",
+          "colecaoId": "cmehdx2nh0000lf04a5n95ytc"
+        },
+        {
+          "id": "cmeheb1xc000fl604g9aj7et7",
+          "productMark": "Zibeline",
+          "productModel": "Quadrado/Trançado Costas",
+          "cor": "Azul",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755538515/dresses/czrczlbgangylxi54lkm.jpg",
+          "slug": "zibeline-quadradotranado-costas-azul",
+          "colecaoId": "cmehdx2nh0000lf04a5n95ytc"
+        }
+      ]
+    },
+    {
+      "id": "cmehfpw3h0000lb0466yvno9v",
+      "title": "Vestidos Pretos",
+      "subtitle": "Clássicos, atemporais e indispensáveis",
+      "description": "Os vestidos pretos são sinônimo de versatilidade e poder. Ideal para ocasiões formais, jantares ou para aquele evento em que você quer se destacar com discrição e estilo.",
+      "bgcolor": "bg-black/90",
+      "buttonText": "Solicitar Catálogo de Vestidos Pretos",
+      "buttonUrl": "https://wa.me//5591985810208?text=\"Solicitar Catálogo de Vestidos Pretos\"",
+      "items": [
+        {
+          "id": "cmehfpw3k0001lb04647i0jrg",
+          "productMark": "Paetê",
+          "productModel": "Decote V/Mari",
+          "cor": "Preto",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755540887/dresses/bfnvfk0qn91f5pycynuf.jpg",
+          "slug": "paet-decote-vmari-preto",
+          "colecaoId": "cmehfpw3h0000lb0466yvno9v"
+        },
+        {
+          "id": "cmehfpw3k0002lb04nfsab9k7",
+          "productMark": "Paetê",
+          "productModel": "Preto Larissa",
+          "cor": "Preto",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755540888/dresses/vgyc0t5bsjtsyukqyuiy.jpg",
+          "slug": "paet-preto-larissa-preto",
+          "colecaoId": "cmehfpw3h0000lb0466yvno9v"
+        },
+        {
+          "id": "cmehfpw3k0003lb04kpf4fqus",
+          "productMark": "Paetê",
+          "productModel": "Preto Corset/Flor",
+          "cor": "Preto",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755540888/dresses/x3cju3gggsbueqdqm6a4.jpg",
+          "slug": "paet-preto-corsetflor-preto",
+          "colecaoId": "cmehfpw3h0000lb0466yvno9v"
+        }
+      ]
+    },
+    {
+      "id": "cmehfw2n10000l2041z85g78b",
+      "title": "Vestidos Rosas",
+      "subtitle": "Delicadeza com atitude",
+      "description": "Os vestidos rosas vão do tom pastel ao pink vibrante, oferecendo opções românticas, femininas e cheias de personalidade.\n\nPerfeitos para celebrações especiais ou looks casuais com charme.",
+      "bgcolor": "bg-primary",
+      "buttonText": "Solicitar Catálogo de Vestidos Rosas",
+      "buttonUrl": "https://wa.me//5591985810208?text=\"Solicitar Catálogo de Vestidos Rosas\"",
+      "items": [
+        {
+          "id": "cmehfw2n40001l204mzm6x8fn",
+          "productMark": "Zibeline",
+          "productModel": "Leudy",
+          "cor": "Rosa",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541174/dresses/vnradgydn0rjlc6gbexq.jpg",
+          "slug": "zibeline-leudy-rosa",
+          "colecaoId": "cmehfw2n10000l2041z85g78b"
+        },
+        {
+          "id": "cmehfw2n40002l2046ejug78z",
+          "productMark": "Fúcsia",
+          "productModel": "Véu/Laço 44",
+          "cor": "Rosa",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541175/dresses/czsmmpsbnxjxmgadrpku.jpg",
+          "slug": "fcsia-vulao-44-rosa",
+          "colecaoId": "cmehfw2n10000l2041z85g78b"
+        },
+        {
+          "id": "cmehfw2n40003l204czgyu8df",
+          "productMark": "Tule Elastano",
+          "productModel": "Trançado/Vel Removível",
+          "cor": "Rosa",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541174/dresses/efc7lq69cpcx3lzotkhm.jpg",
+          "slug": "tule-elastano-tranadovel-removvel-rosa",
+          "colecaoId": "cmehfw2n10000l2041z85g78b"
+        },
+        {
+          "id": "cmehfw2n40004l204ais1y436",
+          "productMark": "Zibeline",
+          "productModel": "Manu/Tomara que Caia",
+          "cor": "Rosa",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541174/dresses/gvlg59wryl0wf2mtt1wq.jpg",
+          "slug": "zibeline-manutomara-que-caia-rosa",
+          "colecaoId": "cmehfw2n10000l2041z85g78b"
+        },
+        {
+          "id": "cmehfw2n40005l204ltfk1a9h",
+          "productMark": "Fúcsia",
+          "productModel": "Saia Orgânica",
+          "cor": "Rosa",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541174/dresses/ginoxzkx16ttw7stovco.jpg",
+          "slug": "fcsia-saia-orgnica-rosa",
+          "colecaoId": "cmehfw2n10000l2041z85g78b"
+        },
+        {
+          "id": "cmehfw2n40006l204vbfzq65b",
+          "productMark": "Paetê Fúcsia",
+          "productModel": "Costa Nua/Yasmin",
+          "cor": "Rosa",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541174/dresses/iwrl9ecuuwev6ydxgjyx.jpg",
+          "slug": "paet-fcsia-costa-nuayasmin-rosa",
+          "colecaoId": "cmehfw2n10000l2041z85g78b"
+        },
+        {
+          "id": "cmehfw2n40007l2046gg8pgou",
+          "productMark": "Tule Cristal",
+          "productModel": "Véu/Gabi",
+          "cor": "Rosa",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541175/dresses/m8urzs1gqo6gxknlrkhf.jpg",
+          "slug": "tule-cristal-vugabi-rosa",
+          "colecaoId": "cmehfw2n10000l2041z85g78b"
+        },
+        {
+          "id": "cmehfw2n40008l204uilij5zo",
+          "productMark": "Zibeline",
+          "productModel": "Tomara que Caia/Laço",
+          "cor": "Rosa",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541175/dresses/kbbmfnihmilenp3ov5bw.jpg",
+          "slug": "zibeline-tomara-que-caialao-rosa",
+          "colecaoId": "cmehfw2n10000l2041z85g78b"
+        },
+        {
+          "id": "cmehfw2n40009l2049e7uekvs",
+          "productMark": "Crepe estruturado",
+          "productModel": "Saia Sobreposta",
+          "cor": "Rosa",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541175/dresses/vqmpsjuqjpazutqivxkw.jpg",
+          "slug": "crepe-estruturado-saia-sobreposta-rosa",
+          "colecaoId": "cmehfw2n10000l2041z85g78b"
+        },
+        {
+          "id": "cmehfw2n4000al204u7f706t5",
+          "productMark": "Zibeline",
+          "productModel": "Ciganinha/Flores",
+          "cor": "Rosa",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541175/dresses/m1xez59kdbwvortliha9.jpg",
+          "slug": "zibeline-ciganinhaflores-rosa",
+          "colecaoId": "cmehfw2n10000l2041z85g78b"
+        }
+      ]
+    },
+    {
+      "id": "cmehfzt360000lb04gqyz74dm",
+      "title": "Vestidos Verdes",
+      "subtitle": "Inspira frescor e elegância",
+      "description": "Os vestidos verdes trazem frescor, leveza e modernidade. Desde o verde-menta ao esmeralda,\neles são ideais para eventos ao ar livre ou produções mais ousadas e elegantes, destacando-se o verde oliva, muito requisitado para madrinhas de casamento, no momento.",
+      "bgcolor": "bg-primary",
+      "buttonText": "Solicitar Catálogo de Vestidos Verdes",
+      "buttonUrl": "https://wa.me//5591985810208?text=\"Solicitar Catálogo de Vestidos Verdes\"",
+      "items": [
+        {
+          "id": "cmehfzt380001lb04p612nymn",
+          "productMark": "Zibeline",
+          "productModel": "Amanda",
+          "cor": "Verde",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541351/dresses/ej3xgtto4smc1wzvgpi8.jpg",
+          "slug": "zibeline-amanda-verde",
+          "colecaoId": "cmehfzt360000lb04gqyz74dm"
+        },
+        {
+          "id": "cmehfzt380002lb04yvftid8t",
+          "productMark": "Acetinado",
+          "productModel": "Sereia c/ manga 44",
+          "cor": "Verde",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541351/dresses/rirvjfdbnouqrb7gmvn5.jpg",
+          "slug": "acetinado-sereia-c-manga-44-verde",
+          "colecaoId": "cmehfzt360000lb04gqyz74dm"
+        },
+        {
+          "id": "cmehfzt380003lb049j3jqev4",
+          "productMark": "Paetê",
+          "productModel": "Corset/Flor",
+          "cor": "Verde",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541351/dresses/sfojbegokhvakewnvpgi.jpg",
+          "slug": "paet-corsetflor-verde",
+          "colecaoId": "cmehfzt360000lb04gqyz74dm"
+        },
+        {
+          "id": "cmehfzt380004lb042lwx3dyp",
+          "productMark": "Crepe Acetinado",
+          "productModel": "Saia Babados",
+          "cor": "Verde",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541351/dresses/jr8dmjhkusgcwgcinhaj.jpg",
+          "slug": "crepe-acetinado-saia-babados-verde",
+          "colecaoId": "cmehfzt360000lb04gqyz74dm"
+        },
+        {
+          "id": "cmehfzt380005lb048axgab5c",
+          "productMark": "Paetê",
+          "productModel": "Saia Babados",
+          "cor": "Verde",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541351/dresses/lfghpklpom3fc8bu2w9l.jpg",
+          "slug": "paet-saia-babados-verde",
+          "colecaoId": "cmehfzt360000lb04gqyz74dm"
+        }
+      ]
+    },
+    {
+      "id": "cmehg33b9000bl204fjfddwb8",
+      "title": "Vestidos Vermelhos",
+      "subtitle": "Para mulheres que não passam despercebidas",
+      "description": "Os vestidos vermelhos são sensuais, marcantes e cheios de energia. Uma escolha poderosa para festas, encontros ou qualquer ocasião em que você queira ser lembrada.",
+      "bgcolor": "bg-primary",
+      "buttonText": "Solicitar Catálogo de Vestidos Vermelhos",
+      "buttonUrl": "https://wa.me//5591985810208?text=\"Solicitar Catálogo de Vestidos Vermelhos\"",
+      "items": [
+        {
+          "id": "cmehg33b9000cl20493769gke",
+          "productMark": "Zibeline",
+          "productModel": "Maxy Laço Beatriz",
+          "cor": "Vermelho",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541504/dresses/gczkapehbwwepfzzyqqd.jpg",
+          "slug": "zibeline-maxy-lao-beatriz-vermelho",
+          "colecaoId": "cmehg33b9000bl204fjfddwb8"
+        },
+        {
+          "id": "cmehg33b9000dl204493w78cz",
+          "productMark": "Zibeline",
+          "productModel": "Vermelho Amanda",
+          "cor": "Vermelho",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541504/dresses/hs6m7u6uni3hhcjokgsc.jpg",
+          "slug": "zibeline-vermelho-amanda-vermelho",
+          "colecaoId": "cmehg33b9000bl204fjfddwb8"
+        },
+        {
+          "id": "cmehg33b9000el2042pyao1mo",
+          "productMark": "Zibeline",
+          "productModel": "Não identificado",
+          "cor": "Vermelho",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541504/dresses/ifpj9n5q2frwg1vjmbig.jpg",
+          "slug": "zibeline-no-identificado-vermelho",
+          "colecaoId": "cmehg33b9000bl204fjfddwb8"
+        },
+        {
+          "id": "cmehg33b9000fl204rog211uf",
+          "productMark": "Não identificado",
+          "productModel": "Não identificado",
+          "cor": "Vermelho",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541504/dresses/iousghpyvak4khsayha2.jpg",
+          "slug": "no-identificado-no-identificado-vermelho",
+          "colecaoId": "cmehg33b9000bl204fjfddwb8"
+        },
+        {
+          "id": "cmehg33b9000gl2043do4qgem",
+          "productMark": "Malha Satin",
+          "productModel": "Vermelho Amanda",
+          "cor": "Vermelho",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541505/dresses/tyv1pobd9cykxf9prdk2.jpg",
+          "slug": "malha-satin-vermelho-amanda-vermelho",
+          "colecaoId": "cmehg33b9000bl204fjfddwb8"
+        }
+      ]
+    },
+    {
+      "id": "cmehg9y26000glb044s9b356r",
+      "title": "Midis Brancos",
+      "subtitle": "Leves, sofisticados e cheios de significado",
+      "description": "Os vestidos midis brancos são ideais para momentos especiais como noivados, batizados, jantares ou celebrações ao ar livre.\n\nTransmitem pureza, delicadeza e elegância em cada detalhe.",
+      "bgcolor": "bg-primary",
+      "buttonText": "Solicitar Catálogo de Midis Brancos",
+      "buttonUrl": "https://wa.me//5591985810208?text=\"Solicitar Catálogo de Midis Brancos\"",
+      "items": [
+        {
+          "id": "cmehg9y26000hlb040rmw5vnq",
+          "productMark": "Midi 1",
+          "productModel": "Midi 1",
+          "cor": "Midis Brancos",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541824/dresses/trblhirwpt5kujv4qfvz.jpg",
+          "slug": "midi-1-midi-1-midis-brancos",
+          "colecaoId": "cmehg9y26000glb044s9b356r"
+        },
+        {
+          "id": "cmehg9y26000ilb04yu8tj6zw",
+          "productMark": "Midi 2",
+          "productModel": "Midi 2",
+          "cor": "Midis Brancos",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541824/dresses/amomjuzhjlspdwnnrifx.jpg",
+          "slug": "midi-2-midi-2-midis-brancos",
+          "colecaoId": "cmehg9y26000glb044s9b356r"
+        },
+        {
+          "id": "cmehg9y26000jlb043t6ibdzi",
+          "productMark": "Midi 3",
+          "productModel": "Midi 3",
+          "cor": "Midis Brancos",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541824/dresses/pzurvxyes5z4fmveipke.jpg",
+          "slug": "midi-3-midi-3-midis-brancos",
+          "colecaoId": "cmehg9y26000glb044s9b356r"
+        }
+      ]
+    },
+    {
+      "id": "cmehgfd530000l804w6g1x5s4",
+      "title": "Clutches",
+      "subtitle": "O toque final perfeito para qualquer produção",
+      "description": "As clutches unem praticidade e estilo, elevando o seu look com charme e sofisticação. Modelos ideais para eventos, festas ou para transformar o básico em algo memorável.",
+      "bgcolor": "bg-primary",
+      "buttonText": "Solicitar Catálogo de Clutches",
+      "buttonUrl": "https://wa.me//5591985810208?text=\"Solicitar Catálogo de Clutches\"",
+      "items": [
+        {
+          "id": "cmehgfd550001l804x4njp6s5",
+          "productMark": "Clutche Amarela",
+          "productModel": "Clutche ",
+          "cor": "Amarela",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755542076/dresses/od9a5tg8jsaq4k3iaatr.jpg",
+          "slug": "clutche-amarela-clutche-amarela",
+          "colecaoId": "cmehgfd530000l804w6g1x5s4"
+        },
+        {
+          "id": "cmehgfd550002l804ob598w37",
+          "productMark": "Clutche Azul",
+          "productModel": "Clutche Azul",
+          "cor": "Azul",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755542077/dresses/cf34kt97tcmowj44zycv.jpg",
+          "slug": "clutche-azul-clutche-azul-azul",
+          "colecaoId": "cmehgfd530000l804w6g1x5s4"
+        },
+        {
+          "id": "cmehgfd550003l804qlnfd24r",
+          "productMark": "Clutche Dourada",
+          "productModel": "Clutche Dourada",
+          "cor": "Dourada",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755542077/dresses/p7pbnqwftv9wuonkxr12.jpg",
+          "slug": "clutche-dourada-clutche-dourada-dourada",
+          "colecaoId": "cmehgfd530000l804w6g1x5s4"
+        },
+        {
+          "id": "cmehgfd550004l804xtohvfdv",
+          "productMark": "Clutche Mármore",
+          "productModel": "Clutche Mármore",
+          "cor": "Mármore",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755542076/dresses/zfujm3dopcxkhkkqbui7.jpg",
+          "slug": "clutche-mrmore-clutche-mrmore-mrmore",
+          "colecaoId": "cmehgfd530000l804w6g1x5s4"
+        },
+        {
+          "id": "cmehgfd550005l804a61k2yrq",
+          "productMark": "Clutche Rosa",
+          "productModel": "Clutche Rosa",
+          "cor": "Rosa",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755542077/dresses/nwqe5zjjo10ytdcmuj2w.jpg",
+          "slug": "clutche-rosa-clutche-rosa-rosa",
+          "colecaoId": "cmehgfd530000l804w6g1x5s4"
+        },
+        {
+          "id": "cmehgfd550006l804unk07chy",
+          "productMark": "Clutche Verde",
+          "productModel": "Clutche Verde",
+          "cor": "Verde",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755542077/dresses/caotqglfh2ncbbqcpw4i.jpg",
+          "slug": "clutche-verde-clutche-verde-verde",
+          "colecaoId": "cmehgfd530000l804w6g1x5s4"
+        }
+      ]
+    },
+    {
+      "id": "cmehg5xi30006lb044bke9og4",
+      "title": "Vestidos Laranjas",
+      "subtitle": "Para mulheres cheias de vida e personalidade",
+      "description": "Os vestidos vermelhos são sensuais, marcantes e cheios de energia. Uma escolha poderosa para festas, encontros ou qualquer ocasião em que você queira ser lembrada.",
+      "bgcolor": "bg-primary",
+      "buttonText": "Solicitar Catálogo de Vestidos Laranjas",
+      "buttonUrl": "https://wa.me//5591985810208?text=\"Solicitar Catálogo de Vestidos Laranjas\"",
+      "items": [
+        {
+          "id": "cmehg5xi30007lb04rs0sczuy",
+          "productMark": "Não identificado",
+          "productModel": "Não identificado",
+          "cor": "Laranja",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541637/dresses/t5e9zeomzfj8pmfl1vsw.jpg",
+          "slug": "no-identificado-no-identificado-laranja",
+          "colecaoId": "cmehg5xi30006lb044bke9og4"
+        },
+        {
+          "id": "cmehg5xi30008lb04v9tsyd6v",
+          "productMark": "Crepe de Seda",
+          "productModel": "Tomara que Caia/Drapeado",
+          "cor": "Laranja",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541637/dresses/fumqflz29hkngezkftsm.jpg",
+          "slug": "crepe-de-seda-tomara-que-caiadrapeado-laranja",
+          "colecaoId": "cmehg5xi30006lb044bke9og4"
+        },
+        {
+          "id": "cmehg5xi30009lb040jinonnq",
+          "productMark": "Zibeline",
+          "productModel": "Decote V/Lenço",
+          "cor": "Laranja",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541637/dresses/l1hft32i6rnyvdlq5myj.jpg",
+          "slug": "zibeline-decote-vleno-laranja",
+          "colecaoId": "cmehg5xi30006lb044bke9og4"
+        },
+        {
+          "id": "cmehg5xi3000alb04g5wrryel",
+          "productMark": "Zibeline",
+          "productModel": "Tomara que Caia/Flor",
+          "cor": "Laranja",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541637/dresses/uuiy1rchpwibbpeybnwf.jpg",
+          "slug": "zibeline-tomara-que-caiaflor-laranja",
+          "colecaoId": "cmehg5xi30006lb044bke9og4"
+        },
+        {
+          "id": "cmehg5xi3000blb045r6uww65",
+          "productMark": "Zibeline",
+          "productModel": "Ombro Só/Flor",
+          "cor": "Laranja",
+          "img": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755541637/dresses/gfpth7arwhfkpnsubzyf.jpg",
+          "slug": "zibeline-ombro-sflor-laranja",
+          "colecaoId": "cmehg5xi30006lb044bke9og4"
+        }
+      ]
+    }
+  ],
+  "banners": [
+    {
+      "id": 1,
+      "banners": [
+        {
+          "id": "1755526044885",
+          "url": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755526044/dresses/vmhxp8ef86wiwgecyshb.jpg",
+          "link": "#colecao",
+          "title": "Coleção 2025 – Cores e Modelos Atualizados para Você Brilhar",
+          "target": "_self"
+        },
+        {
+          "id": "1755526066088",
+          "url": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755526065/dresses/uqops7oypxqbzwfw9wnj.jpg",
+          "link": "#colecao",
+          "title": "Midis Brancos - Perfeitos para solenidades, noivados, batizados ou jantares especiais",
+          "target": "_self"
+        },
+        {
+          "id": "1755526114385",
+          "url": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755526113/dresses/jzua6nkqrh2i2sjynqbj.jpg",
+          "link": "#colecao",
+          "title": "Clutches - O toque final que vai valorizar ainda mais o seu look",
+          "target": "_self"
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "id": "cmeh7lx7d0008la04wmaxtft2",
+      "pergunta": "Como funciona o aluguel de vestidos na My Dress?",
+      "resposta": "O processo é bem simples: você agenda uma visita em nosso espaço, experimenta os modelos disponíveis e escolhe o seu favorito. O vestido é reservado para a data do seu evento, e você retira próximo ao dia. Após o uso, é só devolver - a lavagem está incluída no serviço.",
+      "createdAt": "2025-08-18T14:27:47.929Z",
+      "updatedAt": "2025-08-18T14:27:47.929Z"
+    },
+    {
+      "id": "cmeh7m4kz0009la040vrip1n4",
+      "pergunta": "Preciso agendar para experimentar os vestidos?",
+      "resposta": "Sim! Atendemos exclusivamente com hora marcada, para garantir um atendimento personalizado e tranquilo. Clique aqui para escolher o melhor horário para você.",
+      "createdAt": "2025-08-18T14:27:57.491Z",
+      "updatedAt": "2025-08-18T14:27:57.491Z"
+    },
+    {
+      "id": "cmeh7mi8b000ala046nsvucps",
+      "pergunta": "Com quantos dias de antecedência posso reservar meu vestido?",
+      "resposta": "As reservas podem ser feitas com até 40 dias de antecedência do seu evento. Optamos por esse período, para maior segurança para você, por se tratar de trajes alugáveis. Mas você pode agendar uma visita antes e conhecer pessoalmente nosso acervo, além do catálogo.",
+      "createdAt": "2025-08-18T14:28:15.091Z",
+      "updatedAt": "2025-08-18T14:28:15.091Z"
+    },
+    {
+      "id": "cmeh7mn4h000bla047bkbcow7",
+      "pergunta": "Quais tipos de vestidos vocês alugam?",
+      "resposta": "Trabalhamos com vestidos para formaturas, casamentos (madrinhas e convidadas), aniversários, festas de gala e eventos especiais.)",
+      "createdAt": "2025-08-18T14:28:21.521Z",
+      "updatedAt": "2025-08-18T14:28:21.521Z"
+    },
+    {
+      "id": "cmeh7ms4z000cla04dm3ztdci",
+      "pergunta": "O que está incluído no valor do aluguel?",
+      "resposta": "O valor do aluguel inclui locação do vestido, higienização completa do traje e ajustes necessários.",
+      "createdAt": "2025-08-18T14:28:28.019Z",
+      "updatedAt": "2025-08-18T14:28:28.019Z"
+    },
+    {
+      "id": "cmeh7mxls000dla042x3c3497",
+      "pergunta": "Vocês fazem ajustes no vestido?",
+      "resposta": "Sim! Fazemos ajustes simples como barra e alça, para que o vestido fique perfeito no seu corpo. Os ajustes são verificados na semana do evento.",
+      "createdAt": "2025-08-18T14:28:35.017Z",
+      "updatedAt": "2025-08-18T14:28:35.017Z"
+    },
+    {
+      "id": "cmeh7n4go000ela04klhtxg18",
+      "pergunta": "E se eu sujar ou danificar o vestido?",
+      "resposta": "Manchas comuns de uso já estão previstas e cobertas pela lavagem. Taxa extra de lavagem: A lavanderia não cobre o excesso de sujeira na barra ou manchas no tecido, necessitando de lavagem especial. Danos graves como rasgos, queimaduras ou perdas serão analisadas caso a caso.",
+      "createdAt": "2025-08-18T14:28:43.993Z",
+      "updatedAt": "2025-08-18T14:28:43.993Z"
+    },
+    {
+      "id": "cmeh7n9ww000fla04zfoe5616",
+      "pergunta": "Quais são as formas de pagamento disponíveis?",
+      "resposta": "Pix, dinhheiro ou cartão. No crédito há um pequeno acréscimo da máquina. Parcelamos em até 3x.",
+      "createdAt": "2025-08-18T14:28:50.970Z",
+      "updatedAt": "2025-08-18T14:28:50.970Z"
+    },
+    {
+      "id": "cmeh7nfge000gla0469trwlx1",
+      "pergunta": "Sempre tem novidades?",
+      "resposta": "Sim! Nosso catálogo está sempre atualizando. Todo mês tem vestidos novos chegando.",
+      "createdAt": "2025-08-18T14:28:58.238Z",
+      "updatedAt": "2025-08-18T14:28:58.238Z"
+    },
+    {
+      "id": "cmeh7nl52000hla04wzivbxp3",
+      "pergunta": "O atendimento é somente por agendamento mesmo?",
+      "resposta": "Sim! Pois dessa forma conseguimos realizar um atendimento tranquilo e personalizado para cada cliente.",
+      "createdAt": "2025-08-18T14:29:05.606Z",
+      "updatedAt": "2025-08-18T14:29:05.606Z"
+    }
+  ],
+  "homepageSections": [],
+  "menus": [
+    {
+      "id": 1,
+      "logoUrl": "https://res.cloudinary.com/dk2mgiu3a/image/upload/v1755525952/dresses/ytr9ifkwwrzbmp4osn3q.png",
+      "links": [
+        {
+          "id": "1755525789145",
+          "url": "#",
+          "text": "Início",
+          "target": "_self"
+        },
+        {
+          "id": "1755525833324",
+          "url": "#colecao",
+          "text": "Nossa Coleção",
+          "target": "_self"
+        },
+        {
+          "id": "1755525848956",
+          "url": "#empresa",
+          "text": "Sobre Nós",
+          "target": "_self"
+        },
+        {
+          "id": "1755525860396",
+          "url": "#depoimentos",
+          "text": "Depoimentos",
+          "target": "_self"
+        },
+        {
+          "id": "1755525872108",
+          "url": "#faq",
+          "text": "Perguntas Frequentes",
+          "target": "_self"
+        },
+        {
+          "id": "1755525915268",
+          "url": "#localizacao",
+          "text": "Onde Estamos",
+          "target": "_self"
+        },
+        {
+          "id": "1755525949736",
+          "url": "https://wa.me/5591985810208?text=\"Gostaria de mais informações. Estou entrando em contato através do site.\"",
+          "text": "Contato",
+          "target": "_blank"
+        }
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "cmeh7iy9m0000la04x3exn81j",
+      "name": "Siqueira Coutinho",
+      "type": "texto",
+      "content": "Ambiente maravilhoso e aconchegante, tudo muito organizado, roupas cheirosas e bem cuidadas, atendimento nota mil, com certeza voltarei futuramente.",
+      "createdAt": "2025-08-18T14:25:29.336Z",
+      "updatedAt": "2025-08-18T14:25:29.336Z"
+    },
+    {
+      "id": "cmeh7jh100001jl04om4oxr5t",
+      "name": "Willianni Santos",
+      "type": "texto",
+      "content": "O espaço, os vestidos, o atendimento, tudo incrível 😍",
+      "createdAt": "2025-08-18T14:25:53.652Z",
+      "updatedAt": "2025-08-18T14:25:53.652Z"
+    },
+    {
+      "id": "cmeh7jpq70001la04ctroj8wl",
+      "name": "Patricia Pantoja Evoluir",
+      "type": "texto",
+      "content": "Local incrível, com atendimento impecável! O look um mais lindo que o outro 🥰",
+      "createdAt": "2025-08-18T14:26:04.928Z",
+      "updatedAt": "2025-08-18T14:26:04.928Z"
+    },
+    {
+      "id": "cmeh7jx620002la0443x148u8",
+      "name": "Lorena Honorato",
+      "type": "texto",
+      "content": "Atendimento maravilhoso desde a primeira visita até a devolução. As meninas são muito atenciosas, os vestidos são lindos, e é perceptível o cuidado com as peças e a busca por trazer novos modelos às clientes. Indico para qualquer amiga.",
+      "createdAt": "2025-08-18T14:26:14.571Z",
+      "updatedAt": "2025-08-18T14:26:14.571Z"
+    },
+    {
+      "id": "cmeh7k4n10003la04gb2ed576",
+      "name": "Fabíola Luz",
+      "type": "texto",
+      "content": "Ótimo atendimento! Loja muito bonita e acolhedora. Vestidos em ótimos estados.",
+      "createdAt": "2025-08-18T14:26:24.254Z",
+      "updatedAt": "2025-08-18T14:26:24.254Z"
+    },
+    {
+      "id": "cmeh7kb150004la04amb73bzf",
+      "name": "Raíza Reis",
+      "type": "texto",
+      "content": "Atendimento maravilhoso",
+      "createdAt": "2025-08-18T14:26:32.538Z",
+      "updatedAt": "2025-08-18T14:26:32.538Z"
+    },
+    {
+      "id": "cmeh7kgj00005la04nfyebdjy",
+      "name": "Izabele Matos",
+      "type": "texto",
+      "content": "Excelente atendimento. Moças muito educadas e solícitas, além de lindas opções de vestidos",
+      "createdAt": "2025-08-18T14:26:39.646Z",
+      "updatedAt": "2025-08-18T14:26:39.646Z"
+    },
+    {
+      "id": "cmeh7km6b0006la04jzlnm46i",
+      "name": "Jorge Silva",
+      "type": "texto",
+      "content": "Loja excelente. Visitei com minha esposa e filha. Vestidos novos, bom preço e excelente atendimento. Obrigado às proprietárias.",
+      "createdAt": "2025-08-18T14:26:46.980Z",
+      "updatedAt": "2025-08-18T14:26:46.980Z"
+    },
+    {
+      "id": "cmeh7ks1m0007la043jngp245",
+      "name": "Giuliana Galdino",
+      "type": "texto",
+      "content": "Que loja incrível! Espaço perfeito, bom atendimento, vestidos em ótimo estado, ótimos preços para aluguel, provadores confortáveis e boa localização. Ainda ganhei uma bolsa de brinde, para usar com o vestido.",
+      "createdAt": "2025-08-18T14:26:54.586Z",
+      "updatedAt": "2025-08-18T14:26:54.586Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "cmeh9agbb0000jm04j5982ub2",
+      "name": null,
+      "email": "ads.mydress@gmail.com",
+      "emailVerified": "2025-08-18T16:51:21.910Z",
+      "image": null,
+      "role": "ADMIN",
+      "accounts": [],
+      "sessions": []
+    }
+  ]
+}

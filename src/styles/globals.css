@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos Globais */
+
+body {
+  /* Aplica a fonte padrão, fundo principal e cor de texto */
+  @apply font-sans bg-primary-light text-neutral-dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  @apply text-base antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  /* Estilo para títulos: negrito, cor principal e espaçamento de linha */
+  @apply font-bold text-primary leading-snug;
+}
+
+p {
+  /* Cor padrão para parágrafos */
+  @apply text-neutral-dark mb-2;
+}
+
+a {
+  /* Estilo base para links: cor de destaque, sem sublinhado, transição suave */
+  @apply text-accent no-underline transition-colors duration-300;
+}
+
+a:hover {
+  /* Cor mais clara no hover */
+  @apply text-accent-light;
+}
+
+.container {
+  /* Container responsivo centralizado */
+  @apply max-w-screen-xl mx-auto px-4;
+}
+
+/* Botões */
+
+.btn {
+  /* Botão principal com cor de fundo primária e texto branco */
+  @apply inline-block px-6 py-2 rounded-md font-semibold text-white bg-primary hover:bg-primary-dark transition duration-300;
+}
+
+.btn-outline {
+  /* Botão com contorno, transparente no fundo, com preenchimento no hover */
+  @apply inline-block px-6 py-2 rounded-md font-semibold border border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition duration-300;
+}
+
+.btn-disabled {
+  /* Estilo para botões desabilitados */
+  @apply cursor-not-allowed opacity-50;
+}
+
+/* Inputs e Formulários */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  /* Estilo para campos de formulário com foco na cor primária */
+  @apply w-full px-4 py-2 border rounded-md bg-neutral-light text-neutral-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition duration-200;
+}
+
+label {
+  /* Estilo para rótulos */
+  @apply block mb-1 text-sm font-medium text-neutral-dark;
+}
+
+/* Cards */
+
+.card {
+  /* Estilo para cards */
+  @apply bg-neutral-light shadow-lg rounded-xl p-6;
+}
+
+/* Títulos de seção */
+
+.section-title {
+  /* Títulos de seção centralizados */
+  @apply text-3xl md:text-4xl font-bold text-primary mb-6 text-center;
+}
+
+/* Listas */
+
+ul {
+  /* Listas não ordenadas */
+  @apply list-disc list-inside text-neutral-dark;
+}
+
+ol {
+  /* Listas ordenadas */
+  @apply list-decimal list-inside text-neutral-dark;
+}
+
+/* Imagens */
+
+img {
+  /* Imagens responsivas */
+  @apply max-w-full h-auto;
+}
+
+/* SVGs */
+
+svg {
+  /* SVGs herdam a cor do texto do elemento pai */
+  @apply text-current;
+}
