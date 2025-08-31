@@ -25,7 +25,7 @@ export interface Comment {
   id: string;
   message: string;
   createdAt: string; // Ou Date, dependendo de como você formata a data no frontend
-  updatedAt: string; // Ou Date
+  updatedAt?: string; // Ou Date
   authorId: string;
   author?: User; // Opcional, para incluir os dados do autor
   taskId: string;
@@ -52,5 +52,5 @@ export interface Task {
   projeto?: Projeto; // Objeto do projeto associado, opcional
 
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 }

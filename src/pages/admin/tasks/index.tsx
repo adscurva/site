@@ -1,12 +1,7 @@
 import TasksKanban from "components/admin/tasks/TasksKanban";
 import { useEffect, useState } from "react";
 import { DropResult } from "@hello-pangea/dnd";
-
-type Task = {
-  id: string;
-  title: string;
-  status: "TODO" | "IN_PROGRESS" | "DONE";
-};
+import { Task } from "types/task";
 
 export default function TasksPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
