@@ -124,7 +124,7 @@ export default function Home({ banners, menu, testimonials, faqs, colecoes }: Ho
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Curva Engenharia e Arquitetura",
-        "image": "https://curvaeng.com.br/images/logo.png", // Mantenha ou altere a URL da imagem se precisar
+        "image": "https://curvaengenharia.app.br/images/logo.png", // Mantenha ou altere a URL da imagem se precisar
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "Tv. da Estrela, 46, Marco",
@@ -133,7 +133,7 @@ export default function Home({ banners, menu, testimonials, faqs, colecoes }: Ho
             "postalCode": "66093-065",
             "addressCountry": "BR"
         },
-        "url": "https://curvaeng.com.br/",
+        "url": "https://curvaengenharia.app.br/",
         "telephone": "+5591985014093",
         "hasMap": "https://www.google.com/maps/place/R.+da+Estrela,+46+-+Marco,+Bel%C3%A9m+-+PA,+66093-065/",
         "areaServed": {
@@ -180,15 +180,15 @@ export default function Home({ banners, menu, testimonials, faqs, colecoes }: Ho
                 {/* Metas para Redes Sociais (Open Graph) */}
                 <meta property="og:title" content="Curva Engenharia e Arquitetura | Seu Projeto em Boas Mãos" />
                 <meta property="og:description" content="Projetos de engenharia e arquitetura em Belém-PA. Do design de interiores à gestão de obras, transformamos sua ideia em realidade com inovação e confiança." />
-                <meta property="og:image" content="https://curvaeng.com.br/images/predios.jpg" />
-                <meta property="og:url" content="https://curvaeng.com.br" />
+                <meta property="og:image" content="https://curvaengenharia.app.br/images/predios.jpg" />
+                <meta property="og:url" content="https://curvaengenharia.app.br" />
                 <meta property="og:type" content="website" />
 
                 {/* Metas para Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Curva Engenharia e Arquitetura" />
                 <meta name="twitter:description" content="Projetos e obras em Belém. Soluções completas em engenharia, arquitetura, reformas e design de interiores." />
-                <meta name="twitter:image" content="https://curvaeng.com.br/images/predios.jpg" />
+                <meta name="twitter:image" content="https://curvaengenharia.app.br/images/predios.jpg" />
 
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
                 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />

@@ -48,7 +48,10 @@ export const getServerSideProps: GetServerSideProps<TestimonialsPageProps> = asy
 // Adapte esta função para a forma como seu sistema gerencia o token
 const getToken = () => {
   // Exemplo: pegando o token do localStorage
-  return localStorage.getItem('authToken');
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('authToken');
+  }
+  return null;
 };
 
 export default function Testimonials({ testimonials }: TestimonialsPageProps) {
@@ -145,10 +148,11 @@ export default function Testimonials({ testimonials }: TestimonialsPageProps) {
         },
         body: JSON.stringify(body),
       });
-  
+
       if (res.ok) {
-        const updatedList = await res.json();
-        setTestimonialList(updatedList);
+        // CORREÇÃO: Após a criação/edição, busque a lista atualizada
+        const updatedTestimonials = await fetch('/api/crud/testimonials').then(res => res.json());
+        setTestimonialList(updatedTestimonials);
         setEditing(null);
         setForm({ name: '', type: 'texto', content: '' });
         setFile(null);
@@ -177,10 +181,10 @@ export default function Testimonials({ testimonials }: TestimonialsPageProps) {
           },
           body: JSON.stringify({ id }),
         });
-  
+
         if (res.ok) {
-          const updatedList = await res.json();
-          setTestimonialList(updatedList);
+          // CORREÇÃO: Se a exclusão foi bem-sucedida, atualize a lista localmente
+          setTestimonialList(testimonialList.filter(t => t.id !== id));
         } else {
           const data = await res.json();
           setError('Erro ao excluir depoimento: ' + data.message);
