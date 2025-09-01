@@ -5,7 +5,7 @@ import Image from 'next/image';
 interface HeroBannerInternalProps {
   imageUrl?: string; // Opcional, para caso você queira usar uma imagem específica
   title: string;      // Título do banner
-  subtitle: string;   // Subtítulo do banner
+  subtitle?: string;   // Subtítulo do banner
 }
 
 const HeroBannerInternal: React.FC<HeroBannerInternalProps> = ({ imageUrl, title, subtitle }) => {
@@ -17,8 +17,8 @@ const HeroBannerInternal: React.FC<HeroBannerInternalProps> = ({ imageUrl, title
       <Image
         src={imageUrl || defaultImageUrl}
         alt={`Background da página: ${title}`} // Alt text dinâmico
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: "cover" }}
         className="absolute inset-0 z-0 opacity-70" // Sutil opacidade para o texto se destacar
       />
 

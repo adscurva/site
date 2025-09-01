@@ -37,7 +37,7 @@ const Servicos: React.FC = () => {
               width={600}
               height={400}
               layout="responsive"
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
               className="rounded-xl shadow-2xl transform transition-transform hover:scale-102 duration-300" // Sombra e hover effect
             />
           </div>
@@ -52,7 +52,7 @@ const Servicos: React.FC = () => {
               width={600}
               height={400}
               layout="responsive"
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
               className="rounded-xl shadow-2xl transform transition-transform hover:scale-102 duration-300" // Sombra e hover effect
             />
           </div>
@@ -111,7 +111,7 @@ const Servicos: React.FC = () => {
               width={600}
               height={400}
               layout="responsive"
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
               className="rounded-xl shadow-2xl transform transition-transform hover:scale-102 duration-300" // Sombra e hover effect
             />
           </div>

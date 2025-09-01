@@ -61,7 +61,7 @@ const ZoomableImage: React.FC<ZoomableImageProps> = ({ src, alt }) => {
       <Image
         src={src}
         alt={alt}
-        layout="fill"
+        fill
         objectFit="contain" // Garante que a imagem se ajuste sem cortar
         className="transition-transform ease-in-out duration-300"
         style={{

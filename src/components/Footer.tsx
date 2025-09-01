@@ -34,7 +34,7 @@ const Footer = ({ menuData }: MenuProps) => {
                                 src={logoUrl || "/images/logo.png"}
                                 alt="Curva Engenharia e Arquitetura"
                                 width={150}
-                                height={50}
+                                height={30}
                             />
                         </Link>
                         <p className="text-sm text-white">

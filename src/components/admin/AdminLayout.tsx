@@ -10,9 +10,9 @@ import {
   MdHelpOutline,
   MdLogout,
   MdPalette,
-  MdAssignment, 
-  MdAddCircle, 
-  MdClose, 
+  MdAssignment,
+  MdAddCircle,
+  MdClose,
 } from 'react-icons/md';
 
 interface AdminLayoutProps {
@@ -49,12 +49,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
       {/* Sidebar de Navegação */}
       <aside
-        className={`fixed inset-y-0 left-0 w-64 z-30 shadow-lg p-6 bg-white dark:bg-gray-800 transition-transform duration-300 ease-in-out transform ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:relative md:translate-x-0 md:w-64`}
+        className={`fixed inset-y-0 left-0 w-64 z-30 shadow-lg p-6 bg-white dark:bg-gray-800 transition-transform duration-300 ease-in-out transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          } md:relative md:translate-x-0 md:w-64`}
       >
         <h2 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white">Painel Admin</h2>
-        
+
         <nav className="space-y-6">
           {/* Grupo 1: Conteúdo da Landing Page */}
           <div>
@@ -132,6 +131,12 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 <Link href="/admin/tasks/new" className="text-gray-900 dark:text-white flex items-center p-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 group">
                   <MdAddCircle className="mr-3 text-xl text-gray-500 group-hover:text-primary transition-colors" />
                   <span className="text-sm font-medium">Nova Tarefa</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/admin/files" className="text-gray-900 dark:text-white flex items-center p-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 group">
+                  <MdPhotoLibrary className="mr-3 text-xl text-gray-500 group-hover:text-primary transition-colors" />
+                  <span className="text-sm font-medium">Arquivos</span>
                 </Link>
               </li>
             </ul>

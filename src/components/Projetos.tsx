@@ -104,9 +104,8 @@ const Projetos: React.FC = () => {
     };
 
     return (
-        <div className="bg-gray-50 py-16 md:py-24"> {/* Fundo consistente com outros componentes */}
+        <div className="bg-gray-50 py-16"> {/* Fundo consistente com outros componentes */}
             <div className="container mx-auto px-4 md:px-8">
-
                 {/* Título e Introdução */}
                 <div className="text-center mb-12 md:mb-16 max-w-5xl mx-auto">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4 leading-tight"> {/* Estilo aprimorado */}
@@ -121,9 +120,8 @@ const Projetos: React.FC = () => {
                 <div className="flex flex-wrap justify-center gap-4 my-12">
                     <button
                         onClick={() => setActiveCategory('todos')}
-                        className={`px-6 py-2 rounded-full font-bold transition-colors duration-300 flex items-center shadow-md ${
-                            activeCategory === 'todos' ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                        }`}
+                        className={`px-6 py-2 rounded-full font-bold transition-colors duration-300 flex items-center shadow-md ${activeCategory === 'todos' ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                            }`}
                     >
                         Todos
                     </button>
@@ -131,9 +129,8 @@ const Projetos: React.FC = () => {
                         <button
                             key={category}
                             onClick={() => setActiveCategory(category)}
-                            className={`px-6 py-2 rounded-full font-bold transition-colors duration-300 flex items-center shadow-md ${
-                                activeCategory === category ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                            }`}
+                            className={`px-6 py-2 rounded-full font-bold transition-colors duration-300 flex items-center shadow-md ${activeCategory === category ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                }`}
                         >
                             {getCategoryIcon(category)} {category}
                         </button>
@@ -151,8 +148,8 @@ const Projetos: React.FC = () => {
                                     <Image
                                         src={projeto.items[0].img} // Mostra a primeira foto
                                         alt={projeto.title}
-                                        layout="fill"
-                                        objectFit="cover"
+                                        fill
+                                        style={{ objectFit: "cover" }}
                                         className="rounded-t-xl transition-transform duration-500 hover:scale-110" // Arredonda só em cima
                                     />
                                 </div>

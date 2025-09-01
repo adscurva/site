@@ -12,6 +12,7 @@ import {
 import { Analytics } from '@vercel/analytics/next';
 import Breadcrumb from '../components/Breadcrumb';
 import { MenuInterno } from '../components/MenuInterno'; // Ajuste o caminho se necessário
+import SubtitlePage from 'components/SubtitlePage';
 
 const prisma = new PrismaClient();
 
@@ -87,9 +88,9 @@ const ProjetosPage: React.FC<ProjetosPageProps> = ({ menu }) => {
                     <Breadcrumb />
                     <HeroBannerInternal
                         imageUrl="https://res.cloudinary.com/dacvhzjxb/image/upload/v1756202307/dresses/cld96tpxnlfwhoe4hjxt.jpg" // Substitua pela imagem real que você gerar
-                        title="Nosso Portfólio de Projetos"
-                        subtitle="Explore nossos projetos de engenharia e arquitetura, e veja como transformamos ideias em realidade com excelência e inovação."
+                        title="Nossos Projetos"
                     />
+                    <SubtitlePage text="Conheça nossos projetos de Engenharia, Arquitetura e Design de Interiores e veja como transformamos ideias em realidade com excelência e inovação." />
                     <ProjetosComponent /> {/* Seu componente de projetos */}
                 </main>
                 <Footer menuData={menu} />

@@ -16,6 +16,7 @@ import { Analytics } from '@vercel/analytics/next';
 import ParallaxBanner from 'components/ParallaxBanner';
 import Breadcrumb from 'components/Breadcrumb';
 import HeroBannerInternal from 'components/HeroBannerInternal';
+import SubtitlePage from 'components/SubtitlePage';
 
 const prisma = new PrismaClient();
 
@@ -92,8 +93,8 @@ const ServicosPage: React.FC<ServicosPageProps> = ({ menu }) => {
                     <HeroBannerInternal
                         imageUrl="https://res.cloudinary.com/dacvhzjxb/image/upload/v1756187743/dresses/weck42ticekzxt8fvjs0.jpg" // Sua imagem real
                         title="Soluções Completas para o Seu Projeto"
-                        subtitle="Na Curva Engenharia e Arquitetura, unimos expertise técnica e inovação para entregar projetos que transformam ambientes e superam expectativas. Atuamos em múltiplos segmentos, garantindo soluções personalizadas e de alta qualidade para cada necessidade."
                     />
+                    <SubtitlePage text="Na Curva Engenharia e Arquitetura, unimos expertise técnica e inovação para entregar projetos que transformam ambientes e superam expectativas. Atuamos em múltiplos segmentos, garantindo soluções personalizadas e de alta qualidade para cada necessidade." />
                     <ServicosComponent />
                     <ParallaxBanner
                         imageUrl="/images/predios.jpg"

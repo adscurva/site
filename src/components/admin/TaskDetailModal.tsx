@@ -414,7 +414,20 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500">Vencimento:</p>
-                <p className="mt-1 text-gray-900">{task.dueDate ? formatDate(task.dueDate) : 'N/A'}</p>
+                <div className="mt-1">
+                  {task.dueDate ? (
+                    <>
+                      <p className="text-gray-900">{formatDate(task.dueDate)}</p>
+                      {new Date(task.dueDate) < new Date() && task.status !== 'CONCLUIDA' && (
+                        <span className="mt-1 inline-block px-3 py-1 rounded-full text-sm font-semibold bg-red-100 text-red-800">
+                          Vencida
+                        </span>
+                      )}
+                    </>
+                  ) : (
+                    <p className="text-gray-900">N/A</p>
+                  )}
+                </div>
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500">Responsável:</p>
@@ -452,9 +465,8 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
                   <button
                     type="submit"
                     disabled={isProcessingFile || !fileToUpload}
-                    className={`py-2 px-4 rounded-md font-bold transition duration-300 w-full sm:w-auto ${
-                      isProcessingFile || !fileToUpload ? 'bg-gray-400 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'
-                    } text-white`}
+                    className={`py-2 px-4 rounded-md font-bold transition duration-300 w-full sm:w-auto ${isProcessingFile || !fileToUpload ? 'bg-gray-400 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'
+                      } text-white`}
                   >
                     {isFileUploading ? 'Enviando...' : isFileSavingMetadata ? 'Salvando...' : 'Enviar'}
                   </button>
@@ -540,7 +552,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
                 ))
               )}
             </div>
-            
+
             {(session?.user as any)?.role === 'ADMIN' && (
               <form onSubmit={handleAddComment} className="border-t pt-4 mt-4">
                 <label htmlFor="newComment" className="block text-sm font-medium text-gray-700 mb-2">Adicionar novo comentário</label>
@@ -556,9 +568,8 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
                 <button
                   type="submit"
                   disabled={commentLoading || !newCommentMessage.trim()}
-                  className={`py-2 px-4 rounded-md font-bold transition duration-300 w-full ${
-                    commentLoading || !newCommentMessage.trim() ? 'bg-gray-400 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'
-                  } text-white`}
+                  className={`py-2 px-4 rounded-md font-bold transition duration-300 w-full ${commentLoading || !newCommentMessage.trim() ? 'bg-gray-400 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'
+                    } text-white`}
                 >
                   {commentLoading ? 'Enviando...' : 'Comentar'}
                 </button>

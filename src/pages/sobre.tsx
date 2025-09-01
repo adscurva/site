@@ -31,6 +31,7 @@ import SobreNos from 'components/SobreNos';
 import { MenuInterno } from 'components/MenuInterno';
 import Breadcrumb from 'components/Breadcrumb';
 import HeroBannerInternal from 'components/HeroBannerInternal';
+import SubtitlePage from 'components/SubtitlePage';
 
 // FUNÇÃO SLUGIFY
 function slugify(text: string): string {
@@ -186,8 +187,8 @@ export default function SobrePage({ banners, menu, testimonials, faqs, colecoes 
                     <HeroBannerInternal
                         imageUrl="https://res.cloudinary.com/dacvhzjxb/image/upload/v1756187489/dresses/argn3tvqnxrumkbycf9h.jpg" // Sua imagem real
                         title="Conheça a Curva Engenharia e Arquitetura"
-                        subtitle="Nascemos com a missão de transformar ambientes e concretizar sonhos, unindo expertise técnica, design inovador e um compromisso inabalável com a qualidade e a satisfação do cliente."
                     />
+                    <SubtitlePage text="Nascemos com a missão de transformar ambientes e concretizar sonhos, unindo expertise técnica, design inovador e um compromisso inabalável com a qualidade e a satisfação do cliente." />
                     <SobreNos />
                     <Testimonials testimonials={testimonials} />
                     <ParallaxBanner

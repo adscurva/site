@@ -14,19 +14,8 @@ const SobreNos: React.FC = () => {
   ];
 
   return (
-    <div className="bg-gray-50 text-gray-800 py-24 md:py-32"> {/* Fundo suave */}
+    <div className="bg-gray-50 text-gray-800 py-16"> {/* Fundo suave */}
       <div className="container mx-auto px-4 md:px-8">
-        
-        {/* Seção de Título e Introdução */}
-        {/* <div className="text-center mb-16 md:mb-20 max-w-5xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-800 mb-4 leading-tight">
-            Conheça a Curva Engenharia e Arquitetura
-          </h1>
-          <p className="max-w-3xl mx-auto text-lg md:text-xl text-gray-700 leading-relaxed">
-            Nascemos com a missão de transformar ambientes e concretizar sonhos, unindo expertise técnica, design inovador e um compromisso inabalável com a qualidade e a satisfação do cliente.
-          </p>
-        </div> */}
-
         {/* Seção de História */}
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center mb-20 md:mb-32 max-w-7xl mx-auto">
           <div className="order-2 md:order-1 text-center md:text-left"> {/* Alinhamento de texto */}
@@ -45,7 +34,7 @@ const SobreNos: React.FC = () => {
               width={600}
               height={400}
               layout="responsive"
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
               className="rounded-xl shadow-2xl transform transition-transform hover:scale-102 duration-300" // Sombra e hover effect
             />
           </div>
@@ -91,7 +80,7 @@ const SobreNos: React.FC = () => {
               width={600}
               height={400}
               layout="responsive"
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
               className="rounded-xl shadow-2xl transform transition-transform hover:scale-102 duration-300" // Sombra e hover effect
             />
           </div>

@@ -54,3 +54,26 @@ export interface Task {
   createdAt: string;
   updatedAt?: string;
 }
+
+export interface File {
+  id: string;
+  url: string;          // URL do arquivo na Cloudinary ou outro storage
+  filename: string;     // Nome original do arquivo
+  mimetype: string;     // Tipo MIME (ex: 'application/pdf', 'image/png')
+
+  uploadedBy?: {
+    id: string;
+    name: string;
+  };
+  uploadedById: string;
+
+  taskId?: string;
+  projeto?: {
+    id: string;
+    title: string;
+  };
+  projetoId?: string;
+
+  createdAt: string;
+  updatedAt: string;
+}
