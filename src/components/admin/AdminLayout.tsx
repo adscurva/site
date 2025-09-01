@@ -57,9 +57,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <nav className="space-y-6">
           {/* Grupo 1: Conteúdo da Landing Page */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
-              Conteúdo da LP
-            </h3>
             <ul className="space-y-1 list-none">
               <li>
                 <Link href="/admin" className="text-gray-900 dark:text-white flex items-center p-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 group">
@@ -67,6 +64,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   <span className="text-sm font-medium">Dashboard</span>
                 </Link>
               </li>
+            </ul>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+              Conteúdo do Site
+            </h3>
+            <ul className="space-y-1 list-none">
               <li>
                 <Link href="/admin/menu" className="text-gray-900 dark:text-white flex items-center p-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 group">
                   <MdMenu className="mr-3 text-xl text-gray-500 group-hover:text-primary transition-colors" />
@@ -77,12 +79,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 <Link href="/admin/banner" className="text-gray-900 dark:text-white flex items-center p-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 group">
                   <MdViewCarousel className="mr-3 text-xl text-gray-500 group-hover:text-primary transition-colors" />
                   <span className="text-sm font-medium">Banner</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/homepage" className="text-gray-900 dark:text-white flex items-center p-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 group">
-                  <MdPhotoLibrary className="mr-3 text-xl text-gray-500 group-hover:text-primary transition-colors" />
-                  <span className="text-sm font-medium">Homepage</span>
                 </Link>
               </li>
               <li>
@@ -97,15 +93,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   <span className="text-sm font-medium">FAQ</span>
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          {/* Grupo 2: Catálogo */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
-              Catálogo
-            </h3>
-            <ul className="space-y-1 list-none">
               <li>
                 <Link href="/admin/projetos" className="text-gray-900 dark:text-white flex items-center p-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 group">
                   <MdPalette className="mr-3 text-xl text-gray-500 group-hover:text-primary transition-colors" />

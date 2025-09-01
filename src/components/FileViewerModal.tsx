@@ -1,5 +1,5 @@
 import React from 'react';
-import { File } from '../../../types/task';
+import { File } from 'types/task';
 
 interface FileViewerModalProps {
   file: File;
