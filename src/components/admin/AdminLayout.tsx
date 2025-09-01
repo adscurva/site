@@ -65,6 +65,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 </Link>
               </li>
             </ul>
+          </div>
+          <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
               Conteúdo do Site
             </h3>
@@ -105,19 +107,13 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           {/* Grupo 3: Gerenciamento de Tarefas - NOVO */}
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
-              Gerenciamento de Tarefas
+              Gerenciamento de Equipe
             </h3>
             <ul className="space-y-1 list-none">
               <li>
                 <Link href="/admin/tasks" className="text-gray-900 dark:text-white flex items-center p-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 group">
                   <MdAssignment className="mr-3 text-xl text-gray-500 group-hover:text-primary transition-colors" />
                   <span className="text-sm font-medium">Gerenciar Tarefas</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/tasks/new" className="text-gray-900 dark:text-white flex items-center p-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 group">
-                  <MdAddCircle className="mr-3 text-xl text-gray-500 group-hover:text-primary transition-colors" />
-                  <span className="text-sm font-medium">Nova Tarefa</span>
                 </Link>
               </li>
               <li>

@@ -68,6 +68,11 @@ export interface File {
   uploadedById: string;
 
   taskId?: string;
+  task?: {
+    id: string;
+    title: string;
+  }; // <-- adicionado
+
   projeto?: {
     id: string;
     title: string;
@@ -75,5 +80,5 @@ export interface File {
   projetoId?: string;
 
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 }
