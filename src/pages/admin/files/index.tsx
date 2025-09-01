@@ -316,7 +316,26 @@ export default function FilesPage() {
         )}
 
         {showFileModal && selectedFile && (
-          <FileViewerModal file={selectedFile} onClose={() => setShowFileModal(false)} />
+          <FileViewerModal
+            file={selectedFile}
+            onClose={() => setShowFileModal(false)}
+            onEdit={(file) => {
+              // Aqui você abre um modal de edição para alterar projeto e tarefa
+              console.log('Editar arquivo', file);
+            }}
+            onDelete={async (file) => {
+              // Confirmação já é tratada dentro do modal
+              try {
+                const res = await fetch(`/api/files/${file.id}`, { method: 'DELETE' });
+                if (!res.ok) throw new Error('Falha ao excluir arquivo');
+                setFiles(prev => prev.filter(f => f.id !== file.id));
+                setShowFileModal(false);
+              } catch (err) {
+                console.error(err);
+                alert('Erro ao excluir arquivo');
+              }
+            }}
+          />
         )}
       </div>
     </AdminLayout>
