@@ -198,32 +198,28 @@ export default function TasksPage() {
 
   const handleDragEndDndKit = async (event: DragEndEvent) => {
     const { active, over } = event;
+    if (!over) return;
 
-    if (!over || active.id === over.id) return;
-
-    // Busca a tarefa arrastada
-    const taskToMove = tasks.find(t => t.id === active.id);
+    const taskToMove = tasks.find((t) => t.id === active.id);
     if (!taskToMove) return;
 
-    // Determina o novo status com base na coluna de destino
-    const newStatus = over.id as TaskStatusEnum;
-
-    if (taskToMove.status === newStatus) return; // nada mudou
+    const newStatus = over.id as TaskStatusEnum; // ✅ pega o id da coluna
+    if (taskToMove.status === newStatus) return;
 
     // Atualiza localmente
-    setTasks(prev =>
-      prev.map(t => (t.id === taskToMove.id ? { ...t, status: newStatus } : t))
+    setTasks((prev) =>
+      prev.map((t) => (t.id === taskToMove.id ? { ...t, status: newStatus } : t))
     );
 
     // Atualiza no backend
     try {
-      const response = await fetch(`/api/tasks/${taskToMove.id}`, {
+      const res = await fetch(`/api/tasks/${taskToMove.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: taskToMove.title,
           description: taskToMove.description,
-          status: newStatus, // ✅ envia o valor correto
+          status: newStatus, // ✅ envia o status correto
           priority: taskToMove.priority,
           dueDate: taskToMove.dueDate,
           assignedToId: taskToMove.assignedToId,
@@ -232,12 +228,12 @@ export default function TasksPage() {
         }),
       });
 
-      if (!response.ok) throw new Error("Falha ao atualizar a tarefa.");
+      if (!res.ok) throw new Error("Falha ao atualizar status da tarefa.");
     } catch (err) {
       console.error(err);
-      // Reverte o status se der erro
-      setTasks(prev =>
-        prev.map(t =>
+      // Reverte status em caso de erro
+      setTasks((prev) =>
+        prev.map((t) =>
           t.id === taskToMove.id ? { ...t, status: taskToMove.status } : t
         )
       );
@@ -392,18 +388,19 @@ export default function TasksPage() {
           <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEndDndKit}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {Object.values(TaskStatusEnum).map((statusColumn) => (
-                <SortableContext
+                <div
                   key={statusColumn}
-                  items={kanbanColumns[statusColumn].map(t => t.id)}
-                  strategy={rectSortingStrategy}
+                  id={statusColumn} // ✅ necessário para dnd-kit reconhecer a coluna
+                  className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]"
                 >
-                  <div
-                    className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]"
-                    id={statusColumn} // importante: id da coluna = TaskStatusEnum
+                  <h2 className="text-lg font-bold text-gray-700 mb-4">
+                    {statusColumn.replace(/_/g, " ")} ({kanbanColumns[statusColumn].length})
+                  </h2>
+
+                  <SortableContext
+                    items={kanbanColumns[statusColumn].map((t) => t.id)}
+                    strategy={rectSortingStrategy}
                   >
-                    <h2 className="text-lg font-bold text-gray-700 mb-4">
-                      {statusColumn.replace(/_/g, " ")} ({kanbanColumns[statusColumn].length})
-                    </h2>
                     <div className="space-y-4">
                       {kanbanColumns[statusColumn].map((task) => (
                         <TaskCard
@@ -416,8 +413,8 @@ export default function TasksPage() {
                         />
                       ))}
                     </div>
-                  </div>
-                </SortableContext>
+                  </SortableContext>
+                </div>
               ))}
             </div>
           </DndContext>
