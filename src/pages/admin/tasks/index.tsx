@@ -423,37 +423,60 @@ export default function TasksPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Mapeia as colunas Kanban usando o TaskStatusEnum */}
             {Object.values(TaskStatusEnum).map((statusColumn) => (
               <div
                 key={statusColumn}
-                className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]" // min-h para facilitar o drop em colunas vazias
+                className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]"
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
-                onDrop={(e) => handleDrop(e, statusColumn)} // Passa o status da coluna como novo status
+                onDrop={(e) => handleDrop(e, statusColumn)}
+                onTouchMove={(e) => e.preventDefault()} // previne scroll ao arrastar
+                onTouchEnd={(e) => {
+                  if (!draggedTaskId) return;
+                  const fakeEvent = {
+                    dataTransfer: { getData: () => draggedTaskId },
+                    currentTarget: e.currentTarget,
+                  } as unknown as React.DragEvent<HTMLDivElement>;
+                  handleDrop(fakeEvent, statusColumn);
+                  setDraggedTaskId(null); // limpa o estado após o drop
+                }}
               >
-                <h2 className="text-lg font-bold text-gray-700 mb-4">{statusColumn.replace(/_/g, ' ')} ({kanbanColumns[statusColumn].length})</h2>
+                <h2 className="text-lg font-bold text-gray-700 mb-4">
+                  {statusColumn.replace(/_/g, ' ')} ({kanbanColumns[statusColumn].length})
+                </h2>
                 <div className="space-y-4">
                   {kanbanColumns[statusColumn].length === 0 ? (
                     <div className="text-center text-gray-500 p-4">
                       Nenhuma tarefa nesta coluna.
                     </div>
                   ) : (
-                    kanbanColumns[statusColumn].map(task => (
+                    kanbanColumns[statusColumn].map((task) => (
                       <div
                         key={task.id}
-                        draggable="true" // Torna a div arrastável
-                        onDragStart={(e) => handleDragStart(e, task.id)}
-                        onDragEnd={handleDragEnd}
+                        draggable
+                        onDragStart={(e) => {
+                          setDraggedTaskId(task.id); // ✅ usa o setter do useState
+                          handleDragStart(e, task.id);
+                        }}
+                        onDragEnd={(e) => {
+                          handleDragEnd(e);
+                          setDraggedTaskId(null); // ✅ limpa após o drag
+                        }}
+                        onTouchStart={(e) => {
+                          setDraggedTaskId(task.id); // ✅ usa o setter
+                          handleDragStart(e as unknown as React.DragEvent<HTMLDivElement>, task.id);
+                        }}
                         className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-200 cursor-grab"
                       >
                         <h3 className="text-base font-semibold text-gray-900 truncate">{task.title}</h3>
-                        {task.projeto?.title && ( // NOVO: Exibe o nome do projeto no card Kanban
+                        {task.projeto?.title && (
                           <p className="text-sm text-gray-600 mt-1">Projeto: {task.projeto.title}</p>
                         )}
                         <p className="text-sm text-gray-500 mt-1">Responsável: {task.assignedTo?.name || 'N/A'}</p>
                         {task.dueDate && (
-                          <p className="text-xs text-gray-400 mt-1">Vencimento: {new Date(task.dueDate).toLocaleDateString()}</p>
+                          <p className="text-xs text-gray-400 mt-1">
+                            Vencimento: {new Date(task.dueDate).toLocaleDateString()}
+                          </p>
                         )}
                         <div className="flex flex-wrap items-center mt-2 space-x-2">
                           <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${getPriorityColor(task.priority)}`}>
