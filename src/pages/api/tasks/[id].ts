@@ -8,30 +8,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { id } = req.query;
     const session = await getServerSession(req, res, authOptions);
 
-    console.log(`\n--- [API /api/tasks/${id}] INICIO DA REQUISICAO ---`);
-    console.log(`[API /api/tasks/${id}] Método: ${req.method}`);
-    console.log(`[API /api/tasks/${id}] Requisição Host: ${req.headers.host}`);
-    console.log(`[API /api/tasks/${id}] Requisição Origin: ${req.headers.origin}`);
-    console.log(`[API /api/tasks/${id}] Variável de Ambiente NEXTAUTH_URL no runtime da API: ${process.env.NEXTAUTH_URL}`);
-    console.log(`[API /api/tasks/${id}] Variável de Ambiente NEXTAUTH_SECRET no runtime da API (início/fim): ${process.env.NEXTAUTH_SECRET ? `${process.env.NEXTAUTH_SECRET.substring(0, 5)}...${process.env.NEXTAUTH_SECRET.slice(-5)}` : "NÃO DEFINIDO"}`);
-    console.log(`[API /api/tasks/${id}] Cookies da Requisição: ${req.headers.cookie || 'Nenhum cookie presente'}`);
-    console.log(`[API /api/tasks/${id}] Sessão Recebida (JSON):`, JSON.stringify(session, null, 2));
-    if (session) {
-        console.log(`[API /api/tasks/${id}] User ID na sessão:`, session.user?.id);
-        console.log(`[API /api/tasks/${id}] User Role na sessão:`, (session.user as any)?.role);
-        console.log(`[API /api/tasks/${id}] Tipo da User Role:`, typeof (session.user as any)?.role);
-    } else {
-        console.log(`[API /api/tasks/${id}] Sessão ausente para a requisição.`);
-    }
-    console.log(`--- [API /api/tasks/${id}] FIM DOS LOGS DE SESSAO ---\n`);
-
-
-    if (!session || (session.user as any)?.role !== 'ADMIN') {
-        console.warn(`[API /api/tasks/${id}] Acesso NEGADO para ${req.method}. Motivo: ${!session ? 'Sessão Ausente' : `Role: ${(session?.user as any)?.role} (não é ADMIN)`}`);
-        return res.status(401).json({ message: 'Acesso não autorizado. Apenas administradores podem realizar esta operação.' });
-    }
-
-
     if (typeof id !== 'string') {
         return res.status(400).json({ message: 'ID da tarefa inválido.' });
     }
