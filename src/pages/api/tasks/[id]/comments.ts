@@ -27,15 +27,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         const comments = await prisma.comment.findMany({
           where: { taskId },
-          include: {
-            author: { select: { id: true, name: true } },
-          },
+          include: { author: { select: { id: true, name: true } } },
           orderBy: { createdAt: "asc" },
         });
 
         const commentsWithViewers = await Promise.all(
           comments.map(async (comment) => {
-            if (comment.viewedBy && comment.viewedBy.length > 0) {
+            if (comment.viewedBy?.length) {
               const viewedByUsers = await prisma.user.findMany({
                 where: { id: { in: comment.viewedBy } },
                 select: { id: true, name: true },
@@ -46,7 +44,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           })
         );
 
-        console.log(`[API /api/tasks/${taskId}/comments] GET executado. ${comments.length} comentários encontrados.`);
         return res.status(200).json(commentsWithViewers);
       } catch (e: any) {
         console.error(`[API /api/tasks/${taskId}/comments] Erro ao buscar comentários:`, e);
@@ -54,32 +51,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
     case "POST":
-      if (!session) {
-        console.warn(`[API /api/tasks/${taskId}/comments] Acesso NEGADO para POST. Sessão ausente.`);
+      // ✅ Checagem segura
+      if (!session?.user?.id) {
         return res.status(401).json({ message: "É necessário estar autenticado para comentar." });
       }
 
       const { message } = req.body;
-      const authorId = session.user.id; // ✅ já reconhecido pelo TS
+      const authorId = session.user.id; // agora seguro, porque checamos acima
 
-      if (!message || !authorId) {
-        return res.status(400).json({ message: "Mensagem e ID do autor são obrigatórios." });
+      if (!message) {
+        return res.status(400).json({ message: "Mensagem é obrigatória." });
       }
 
       try {
         const newComment = await prisma.comment.create({
-          data: {
-            message,
-            authorId,
-            taskId,
-            viewedBy: [], // Inicialmente, ninguém visualizou
-          },
-          include: {
-            author: { select: { id: true, name: true } },
-          },
+          data: { message, authorId, taskId, viewedBy: [] },
+          include: { author: { select: { id: true, name: true } } },
         });
-
-        console.log(`[API /api/tasks/${taskId}/comments] POST executado. Comentário ${newComment.id} criado.`);
 
         const newCommentWithViewers = { ...newComment, viewedByUsers: [] };
         return res.status(201).json(newCommentWithViewers);
