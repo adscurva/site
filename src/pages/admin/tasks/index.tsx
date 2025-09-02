@@ -203,7 +203,7 @@ export default function TasksPage() {
     const taskToMove = tasks.find((t) => t.id === active.id);
     if (!taskToMove) return;
 
-    const newStatus = over.id as TaskStatusEnum; // ✅ pega o id da coluna
+    const newStatus = over.id as TaskStatusEnum; // ✅ Deve ser a string literal do enum
     if (taskToMove.status === newStatus) return;
 
     // Atualiza localmente
@@ -219,7 +219,7 @@ export default function TasksPage() {
         body: JSON.stringify({
           title: taskToMove.title,
           description: taskToMove.description,
-          status: newStatus, // ✅ envia o status correto
+          status: newStatus, // ✅ agora é a string correta: PENDENTE, EM_ANDAMENTO ou CONCLUIDA
           priority: taskToMove.priority,
           dueDate: taskToMove.dueDate,
           assignedToId: taskToMove.assignedToId,
@@ -390,29 +390,25 @@ export default function TasksPage() {
               {Object.values(TaskStatusEnum).map((statusColumn) => (
                 <div
                   key={statusColumn}
-                  id={statusColumn} // ✅ necessário para dnd-kit reconhecer a coluna
+                  id={statusColumn} // ✅ importante: id da coluna = string do status
                   className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]"
                 >
-                  <h2 className="text-lg font-bold text-gray-700 mb-4">
-                    {statusColumn.replace(/_/g, " ")} ({kanbanColumns[statusColumn].length})
-                  </h2>
+                  <h2>{statusColumn.replace(/_/g, " ")}</h2>
 
                   <SortableContext
                     items={kanbanColumns[statusColumn].map((t) => t.id)}
                     strategy={rectSortingStrategy}
                   >
-                    <div className="space-y-4">
-                      {kanbanColumns[statusColumn].map((task) => (
-                        <TaskCard
-                          key={task.id}
-                          task={task}
-                          onOpenDetail={openDetailModal}
-                          onOpenEdit={openEditModal}
-                          getPriorityColor={getPriorityColor}
-                          getPriorityText={getPriorityText}
-                        />
-                      ))}
-                    </div>
+                    {kanbanColumns[statusColumn].map((task) => (
+                      <TaskCard
+                        key={task.id}
+                        task={task}
+                        onOpenDetail={openDetailModal}
+                        onOpenEdit={openEditModal}
+                        getPriorityColor={getPriorityColor}
+                        getPriorityText={getPriorityText}
+                      />
+                    ))}
                   </SortableContext>
                 </div>
               ))}
