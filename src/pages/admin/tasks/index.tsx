@@ -9,7 +9,6 @@ import TaskEditForm from 'components/admin/TaskEditForm';
 import { DndContext, closestCenter, DragEndEvent } from "@dnd-kit/core";
 import { SortableContext, useSortable, rectSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { TaskCard } from 'components/TaskCard';
 
 // As interfaces Task, User e Projeto agora são importadas de '../../../types/task'
 // Removidas as declarações de interface locais duplicadas.
@@ -196,59 +195,87 @@ export default function TasksPage() {
     e.currentTarget.classList.remove('bg-orange-100', 'border-orange-500'); // Remove feedback visual
   };
 
-  const handleDragEndDndKit = async (taskId: string, newStatus: TaskStatusEnum) => {
-    const taskToMove = tasks.find(t => t.id === taskId);
-    if (!taskToMove) return;
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>, newStatus: TaskStatusEnum) => {
+    e.preventDefault();
+    e.currentTarget.classList.remove('bg-orange-100', 'border-orange-500'); // Remove feedback visual
 
-    // Se o status não mudou, não faz nada
-    if (taskToMove.status === newStatus) return;
+    const taskId = e.dataTransfer.getData("taskId");
+    console.log("handleDrop: taskId from dataTransfer:", taskId);
 
-    console.log("handleDragEndDndKit: Alterando status", {
-      taskId: taskToMove.id,
-      oldStatus: taskToMove.status,
-      newStatus,
-    });
+    // Encontre a tarefa arrastada
+    const taskToMove = tasks.find(task => task.id === taskId);
+    console.log("handleDrop: taskToMove found:", taskToMove);
 
-    // Atualiza localmente imediatamente
-    setTasks(prev =>
-      prev.map(t => (t.id === taskToMove.id ? { ...t, status: newStatus } : t))
+    // **Lógica de validação ajustada:**
+    // 1. O taskId deve existir
+    // 2. A tarefa deve ser encontrada
+    // 3. O novo status deve ser diferente do status atual da tarefa
+    if (!taskId || !taskToMove || taskToMove.status === newStatus) {
+      console.log("handleDrop: Aborting drop. Reasons:",
+        !taskId ? "Invalid taskId." : "",
+        !taskToMove ? "Task not found." : "",
+        taskToMove?.status === newStatus ? `Status is already ${newStatus}.` : ""
+      );
+      return;
+    }
+
+    console.log("handleDrop: Attempting to update task status.");
+    console.log("handleDrop: Old Status:", taskToMove.status, "New Status:", newStatus);
+    console.log("handleDrop: Full task object being sent:", { ...taskToMove, status: newStatus });
+
+
+    // Atualiza o estado local imediatamente para uma experiência de usuário mais fluida
+    setTasks(prevTasks =>
+      prevTasks.map(task =>
+        task.id === taskId ? { ...task, status: newStatus } : task
+      )
     );
 
-    // Atualiza no backend
+    // Atualiza o backend
     try {
-      const response = await fetch(`/api/tasks/${taskToMove.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch(`/api/tasks/${taskId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // Certifique-se de enviar APENAS os campos que podem ser atualizados via PUT
+        // E inclua o `assignedToId` e `authorId` que são campos obrigatórios
         body: JSON.stringify({
           title: taskToMove.title,
           description: taskToMove.description,
-          status: newStatus, // ✅ envia o enum correto
+          status: newStatus,
           priority: taskToMove.priority,
           dueDate: taskToMove.dueDate,
           assignedToId: taskToMove.assignedToId,
-          authorId: taskToMove.authorId,
-          projetoId: taskToMove.projetoId,
+          authorId: taskToMove.authorId, // Mantém o autorId (não deve ser alterado via PUT de status)
+          projetoId: taskToMove.projetoId, // Inclui o projetoId para manter a consistência
         }),
       });
 
+      console.log("handleDrop: API response received:", response);
+
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Erro na API:", errorData);
-        // Reverte localmente se a API falhar
-        setTasks(prev =>
-          prev.map(t =>
-            t.id === taskToMove.id ? { ...t, status: taskToMove.status } : t
+        console.error("handleDrop: API error response data:", errorData);
+        // Reverte a mudança no frontend se a API falhar
+        setTasks(prevTasks =>
+          prevTasks.map(task =>
+            task.id === taskId ? { ...task, status: taskToMove.status } : task
           )
         );
-        throw new Error(errorData.message || "Falha ao atualizar status da tarefa.");
+        throw new Error(errorData.message || 'Falha ao atualizar o status da tarefa no backend.');
+      } else {
+        console.log("handleDrop: Task status updated successfully in backend.");
       }
-
-      console.log("Status atualizado com sucesso no backend:", newStatus);
+      // O fetchTasks pode ser chamado aqui para revalidar os dados, se necessário,
+      // mas como o estado local já foi atualizado, pode ser opcional.
+      // fetchTasks();
     } catch (err) {
+      setError(err instanceof Error ? err.message : 'Um erro inesperado ocorreu ao atualizar o status.');
       console.error("Erro ao atualizar status via API:", err);
-      setError(err instanceof Error ? err.message : "Erro inesperado.");
     }
   };
+  // --- Fim das Funções de Drag and Drop ---
 
   if (error) {
     return (
@@ -395,31 +422,59 @@ export default function TasksPage() {
             )}
           </div>
         ) : (
-          <>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Mapeia as colunas Kanban usando o TaskStatusEnum */}
             {Object.values(TaskStatusEnum).map((statusColumn) => (
-              <SortableContext
+              <div
                 key={statusColumn}
-                items={kanbanColumns[statusColumn].map(t => t.id)}
-                strategy={rectSortingStrategy}
+                className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]" // min-h para facilitar o drop em colunas vazias
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={(e) => handleDrop(e, statusColumn)} // Passa o status da coluna como novo status
               >
-                <div className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]">
-                  <h2>{statusColumn.replace(/_/g, " ")} ({kanbanColumns[statusColumn].length})</h2>
-
-                  {kanbanColumns[statusColumn].map(task => (
-                    <TaskCard
-                      key={task.id}
-                      task={task}
-                      onOpenDetail={openDetailModal}
-                      onOpenEdit={openEditModal}
-                      getPriorityColor={getPriorityColor}
-                      getPriorityText={getPriorityText}
-                      onDragEnd={() => handleDragEndDndKit(task.id, statusColumn)} // ✅ Passa o status correto
-                    />
-                  ))}
+                <h2 className="text-lg font-bold text-gray-700 mb-4">{statusColumn.replace(/_/g, ' ')} ({kanbanColumns[statusColumn].length})</h2>
+                <div className="space-y-4">
+                  {kanbanColumns[statusColumn].length === 0 ? (
+                    <div className="text-center text-gray-500 p-4">
+                      Nenhuma tarefa nesta coluna.
+                    </div>
+                  ) : (
+                    kanbanColumns[statusColumn].map(task => (
+                      <div
+                        key={task.id}
+                        draggable="true" // Torna a div arrastável
+                        onDragStart={(e) => handleDragStart(e, task.id)}
+                        onDragEnd={handleDragEnd}
+                        className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-200 cursor-grab"
+                      >
+                        <h3 className="text-base font-semibold text-gray-900 truncate">{task.title}</h3>
+                        {task.projeto?.title && ( // NOVO: Exibe o nome do projeto no card Kanban
+                          <p className="text-sm text-gray-600 mt-1">Projeto: {task.projeto.title}</p>
+                        )}
+                        <p className="text-sm text-gray-500 mt-1">Responsável: {task.assignedTo?.name || 'N/A'}</p>
+                        {task.dueDate && (
+                          <p className="text-xs text-gray-400 mt-1">Vencimento: {new Date(task.dueDate).toLocaleDateString()}</p>
+                        )}
+                        <div className="flex flex-wrap items-center mt-2 space-x-2">
+                          <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${getPriorityColor(task.priority)}`}>
+                            {getPriorityText(task.priority)}
+                          </span>
+                        </div>
+                        <div className="flex justify-end mt-4 space-x-2">
+                          <button onClick={() => openDetailModal(task)} className="text-sm text-orange-600 hover:text-orange-900">
+                            Detalhes
+                          </button>
+                          <button onClick={() => openEditModal(task)} className="text-sm text-blue-600 hover:text-blue-900">
+                            Editar
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
                 </div>
-              </SortableContext>
+              </div>
             ))}
-          </>
+          </div>
         )}
       </div>
 
