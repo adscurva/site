@@ -17,34 +17,63 @@ type FilesTableProps = {
   handleDelete: (file: DbFile) => void;
 };
 
-const FilesTable = ({ files, selectedFilesIds, toggleFileSelection, handleFileClick, handleEditFile, handleDelete }: FilesTableProps) => {
+const FilesTable = ({
+  files,
+  selectedFilesIds,
+  toggleFileSelection,
+  handleFileClick,
+  handleEditFile,
+  handleDelete,
+}: FilesTableProps) => {
   const getFileIcon = (mimetype: string) => {
-    if (mimetype.startsWith('image/')) return <span className="text-blue-500">🖼️</span>;
-    if (mimetype === 'application/pdf') return <span className="text-red-500">📄</span>;
+    if (mimetype.startsWith("image/"))
+      return <span className="text-blue-500">🖼️</span>;
+    if (mimetype === "application/pdf")
+      return <span className="text-red-500">📄</span>;
     return <span className="text-gray-500">📁</span>;
   };
 
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden">
       {files.length === 0 ? (
-        <p className="p-6 text-gray-500 text-center">Nenhum arquivo encontrado.</p>
+        <p className="p-6 text-gray-500 text-center">
+          Nenhum arquivo encontrado.
+        </p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
+          {/* Desktop */}
+          <table className="hidden md:table min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3"><span className="sr-only">Selecionar</span></th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Arquivo</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Projeto</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tarefa</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
-                <th className="px-6 py-3 relative"><span className="sr-only">Ações</span></th>
+                <th className="px-6 py-3">
+                  <span className="sr-only">Selecionar</span>
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Arquivo
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Projeto
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Tarefa
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Tipo
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Data
+                </th>
+                <th className="px-6 py-3 relative">
+                  <span className="sr-only">Ações</span>
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {files.map(file => (
-                <tr key={file.id} className="hover:bg-gray-100 transition duration-150">
+              {files.map((file) => (
+                <tr
+                  key={file.id}
+                  className="hover:bg-gray-100 transition duration-150"
+                >
                   <td className="px-6 py-4">
                     <input
                       type="checkbox"
@@ -54,23 +83,110 @@ const FilesTable = ({ files, selectedFilesIds, toggleFileSelection, handleFileCl
                     />
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-900 truncate flex items-center gap-2">
-                    {file.mimetype.startsWith('image/') ? (
-                      <img src={file.url} className="w-8 h-8 object-cover rounded" />
-                    ) : getFileIcon(file.mimetype)}
+                    {file.mimetype.startsWith("image/") ? (
+                      <img
+                        src={file.url}
+                        className="w-8 h-8 object-cover rounded"
+                      />
+                    ) : (
+                      getFileIcon(file.mimetype)
+                    )}
                     {file.filename}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{file.projeto?.title || 'N/A'}</td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{file.task?.title || 'N/A'}</td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{file.mimetype}</td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{new Date(file.createdAt).toLocaleDateString()}</td>
+                  <td className="px-6 py-4 text-sm text-gray-500">
+                    {file.projeto?.title || "N/A"}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500">
+                    {file.task?.title || "N/A"}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500">
+                    {file.mimetype}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500">
+                    {new Date(file.createdAt).toLocaleDateString()}
+                  </td>
                   <td className="px-6 py-4 text-right text-sm font-medium flex gap-2 justify-end">
-                    <button onClick={() => handleFileClick(file)} className="text-orange-600 hover:text-orange-900">Visualizar</button>
-                    <button onClick={() => handleEditFile(file)} className="text-orange-600 hover:text-green-900">Editar</button>
+                    <button
+                      onClick={() => handleFileClick(file)}
+                      className="text-orange-600 hover:text-orange-900"
+                    >
+                      Visualizar
+                    </button>
+                    <button
+                      onClick={() => handleEditFile(file)}
+                      className="text-green-600 hover:text-green-900"
+                    >
+                      Editar
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+
+          {/* Mobile */}
+          <div className="md:hidden divide-y divide-gray-200">
+            {files.map((file) => (
+              <div
+                key={file.id}
+                className="p-4 flex flex-col gap-2 border-b border-gray-100"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedFilesIds.includes(file.id)}
+                      onChange={() => toggleFileSelection(file.id)}
+                      className="w-4 h-4"
+                    />
+                    {file.mimetype.startsWith("image/") ? (
+                      <img
+                        src={file.url}
+                        className="w-10 h-10 object-cover rounded"
+                      />
+                    ) : (
+                      getFileIcon(file.mimetype)
+                    )}
+                    <span className="font-medium text-gray-900 text-sm truncate">
+                      {file.filename}
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-xs text-gray-500">
+                  <span className="font-semibold">Projeto: </span>
+                  {file.projeto?.title || "N/A"}
+                </p>
+                <p className="text-xs text-gray-500">
+                  <span className="font-semibold">Tarefa: </span>
+                  {file.task?.title || "N/A"}
+                </p>
+                <p className="text-xs text-gray-500">
+                  <span className="font-semibold">Tipo: </span>
+                  {file.mimetype}
+                </p>
+                <p className="text-xs text-gray-500">
+                  <span className="font-semibold">Data: </span>
+                  {new Date(file.createdAt).toLocaleDateString()}
+                </p>
+
+                <div className="flex justify-end gap-3 mt-2">
+                  <button
+                    onClick={() => handleFileClick(file)}
+                    className="text-orange-600 text-sm"
+                  >
+                    Visualizar
+                  </button>
+                  <button
+                    onClick={() => handleEditFile(file)}
+                    className="text-green-600 text-sm"
+                  >
+                    Editar
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
