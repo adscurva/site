@@ -79,9 +79,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
       {/* Sidebar de Navegação */}
       <aside
-        className={`fixed inset-y-0 left-0 w-64 z-30 shadow-lg p-6 bg-white dark:bg-gray-800 transition-transform duration-300 ease-in-out transform ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } md:relative md:translate-x-0 md:w-64`}
+        className={`fixed inset-y-0 left-0 w-64 z-30 shadow-lg p-6 bg-white dark:bg-gray-800 transition-transform duration-300 ease-in-out transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } md:relative md:translate-x-0 md:w-64`}
       >
         <h2 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white">
           Painel Admin
@@ -191,15 +190,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             <ul className="space-y-1 list-none">
               <li>
                 <button
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                  className="w-full text-left flex items-center p-3 rounded-lg text-primary hover:bg-primary dark:hover:bg-primary transition-colors duration-200"
-                >
-                  <MdLogout className="mr-3 text-xl" />
-                  <span className="text-sm font-medium">Sair</span>
-                </button>
-              </li>
-              <li>
-                <button
                   onClick={toggleTheme}
                   className="w-full text-left flex items-center p-3 rounded-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                 >
@@ -211,6 +201,15 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   <span className="text-sm font-medium">
                     {theme === "light" ? "Modo Escuro" : "Modo Claro"}
                   </span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="w-full text-left flex items-center p-3 rounded-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                >
+                  <MdLogout className="mr-3 text-xl" />
+                  <span className="text-sm font-medium">Sair</span>
                 </button>
               </li>
             </ul>
