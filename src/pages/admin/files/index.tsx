@@ -507,7 +507,7 @@ export default function FilesPage() {
     <AdminLayout>
       <Head><title>Arquivos</title></Head>
       <div className="container mx-auto p-4 md:p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Arquivos</h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-6">Gerenciar Arquivos</h1>
 
         {/* Filtros */}
         <div className="flex flex-wrap items-center gap-4 mb-6">

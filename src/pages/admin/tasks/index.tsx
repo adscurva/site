@@ -305,7 +305,7 @@ export default function TasksPage() {
         </Head>
 
         <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">Minhas Tarefas</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Gerenciar Tarefas</h1>
           <div className="flex flex-wrap items-center gap-4 mt-4 md:mt-0">
             {/* NOVO: Filtro de Projeto */}
             <div className="w-full md:w-auto">
