@@ -1,27 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
 import { FaPaperPlane } from 'react-icons/fa'; // Ícone para o botão de envio
-
-// Função para aplicar a máscara no número de telefone
-const formatPhoneNumber = (value: string): string => {
-    if (!value) return value;
-    const phoneNumber = value.replace(/[^\d]/g, '');
-    const phoneNumberLength = phoneNumber.length;
-
-    if (phoneNumberLength <= 2) {
-        return phoneNumber;
-    }
-
-    if (phoneNumberLength <= 7) {
-        return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2)}`;
-    }
-
-    if (phoneNumberLength <= 11) {
-        return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2, 7)}-${phoneNumber.slice(7)}`;
-    }
-
-    // Retorna o formato completo de 11 dígitos para o Brasil
-    return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2, 7)}-${phoneNumber.slice(7, 11)}`;
-};
+import { formatPhoneNumber } from 'utils/formatPhoneNumber';
 
 const ContactForm: React.FC = () => {
     const [name, setName] = useState('');

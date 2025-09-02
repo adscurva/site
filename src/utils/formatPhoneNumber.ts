@@ -15,6 +15,5 @@ export const formatPhoneNumber = (value: string): string => {
         return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2, 7)}-${phoneNumber.slice(7)}`;
     }
 
-    // Retorna o formato completo de 11 dígitos para o Brasil
     return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2, 7)}-${phoneNumber.slice(7, 11)}`;
 };

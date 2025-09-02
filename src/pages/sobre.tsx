@@ -2,31 +2,16 @@
 import { PrismaClient } from '@prisma/client';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Script from 'next/script';
-import HeroSlider from '../components/HeroSlider';
 import WhatsAppButton from '../components/WhatsAppButton';
-import DressesGallery from '../components/DressesGallery';
 import Testimonials from '../components/Testimonials';
-import FAQ from '../components/FAQ';
-import LocationMap from '../components/LocationMap';
-import Header from 'components/Header';
-import { Menu as MenuComponent } from 'components/Menu';
-import Hero from 'components/Hero';
 import { Analytics } from "@vercel/analytics/next";
 import {
     HomePageProps,
-    ColecaoProps,
-    ColecaoItem
-} from '../types/index';
-import PromotionsForm from 'components/PromotionsForm';
-import FloatingButtons from 'components/FloatingButtons';
+    ColecaoProps} from '../types/index';
 import { useState, useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import ParallaxBanner from 'components/ParallaxBanner';
-import TimelineSection from 'components/TimelineSection';
-import ServicesSection from 'components/ServicesSection';
 import Footer from 'components/Footer';
-import ContactForm from 'components/ContactForm';
 import SobreNos from 'components/SobreNos';
 import { MenuInterno } from 'components/MenuInterno';
 import Breadcrumb from 'components/Breadcrumb';
