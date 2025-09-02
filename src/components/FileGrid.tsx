@@ -4,7 +4,7 @@ import { File } from 'types/task';
 type Props = {
   files: File[];
   handleFileClick: (file: File) => void;
-  getFileIcon: (mimetype: string) => JSX.Element;
+  getFileIcon: (mimetype: string) => React.ReactNode;
 };
 
 export default function FileGrid({ files, handleFileClick, getFileIcon }: Props) {

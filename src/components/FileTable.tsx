@@ -8,7 +8,7 @@ type Props = {
   handleDelete: (file: File) => void;
   confirmingDeleteId: string | null;
   setConfirmingDeleteId: (id: string | null) => void;
-  getFileIcon: (mimetype: string) => JSX.Element;
+  getFileIcon: (mimetype: string) => React.ReactNode;
 };
 
 export default function FileTable({ files, handleFileClick, handleEditFile, handleDelete, confirmingDeleteId, setConfirmingDeleteId, getFileIcon }: Props) {
