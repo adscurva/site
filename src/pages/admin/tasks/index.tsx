@@ -196,21 +196,9 @@ export default function TasksPage() {
     e.currentTarget.classList.remove('bg-orange-100', 'border-orange-500'); // Remove feedback visual
   };
 
-  const handleDragEndDndKit = async (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over) return; // Se não houver target, aborta
-
-    // Procura a tarefa arrastada
-    const taskToMove = tasks.find((t) => t.id === active.id);
+  const handleDragEndDndKit = async (taskId: string, newStatus: TaskStatusEnum) => {
+    const taskToMove = tasks.find(t => t.id === taskId);
     if (!taskToMove) return;
-
-    // Verifica se over.id é um valor válido do enum
-    if (!Object.values(TaskStatusEnum).includes(over.id as TaskStatusEnum)) {
-      console.warn("handleDragEndDndKit: over.id não é um status válido:", over.id);
-      return;
-    }
-
-    const newStatus = over.id as TaskStatusEnum;
 
     // Se o status não mudou, não faz nada
     if (taskToMove.status === newStatus) return;
@@ -222,8 +210,8 @@ export default function TasksPage() {
     });
 
     // Atualiza localmente imediatamente
-    setTasks((prev) =>
-      prev.map((t) => (t.id === taskToMove.id ? { ...t, status: newStatus } : t))
+    setTasks(prev =>
+      prev.map(t => (t.id === taskToMove.id ? { ...t, status: newStatus } : t))
     );
 
     // Atualiza no backend
@@ -234,7 +222,7 @@ export default function TasksPage() {
         body: JSON.stringify({
           title: taskToMove.title,
           description: taskToMove.description,
-          status: newStatus, // ✅ Agora envia o enum correto
+          status: newStatus, // ✅ envia o enum correto
           priority: taskToMove.priority,
           dueDate: taskToMove.dueDate,
           assignedToId: taskToMove.assignedToId,
@@ -247,8 +235,8 @@ export default function TasksPage() {
         const errorData = await response.json();
         console.error("Erro na API:", errorData);
         // Reverte localmente se a API falhar
-        setTasks((prev) =>
-          prev.map((t) =>
+        setTasks(prev =>
+          prev.map(t =>
             t.id === taskToMove.id ? { ...t, status: taskToMove.status } : t
           )
         );
@@ -407,37 +395,31 @@ export default function TasksPage() {
             )}
           </div>
         ) : (
-          <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEndDndKit}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {Object.values(TaskStatusEnum).map((statusColumn) => (
-                <div
-                  key={statusColumn}
-                  id={statusColumn} // ✅ importante: id da coluna = string do enum
-                  className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]"
-                >
-                  <h2 className="text-lg font-bold text-gray-700 mb-4">
-                    {statusColumn.replace(/_/g, ' ')} ({kanbanColumns[statusColumn].length})
-                  </h2>
+          <>
+            {Object.values(TaskStatusEnum).map((statusColumn) => (
+              <SortableContext
+                key={statusColumn}
+                items={kanbanColumns[statusColumn].map(t => t.id)}
+                strategy={rectSortingStrategy}
+              >
+                <div className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]">
+                  <h2>{statusColumn.replace(/_/g, " ")} ({kanbanColumns[statusColumn].length})</h2>
 
-                  <SortableContext
-                    items={kanbanColumns[statusColumn].map((t) => t.id)}
-                    strategy={rectSortingStrategy}
-                  >
-                    {kanbanColumns[statusColumn].map((task) => (
-                      <TaskCard
-                        key={task.id}
-                        task={task}
-                        getPriorityColor={getPriorityColor}
-                        getPriorityText={getPriorityText}
-                        onOpenDetail={openDetailModal}
-                        onOpenEdit={openEditModal}
-                      />
-                    ))}
-                  </SortableContext>
+                  {kanbanColumns[statusColumn].map(task => (
+                    <TaskCard
+                      key={task.id}
+                      task={task}
+                      onOpenDetail={openDetailModal}
+                      onOpenEdit={openEditModal}
+                      getPriorityColor={getPriorityColor}
+                      getPriorityText={getPriorityText}
+                      onDragEnd={() => handleDragEndDndKit(task.id, statusColumn)} // ✅ Passa o status correto
+                    />
+                  ))}
                 </div>
-              ))}
-            </div>
-          </DndContext>
+              </SortableContext>
+            ))}
+          </>
         )}
       </div>
 
