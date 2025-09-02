@@ -4,17 +4,17 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import AdminLayout from 'components/admin/AdminLayout';
-import { File, Projeto, Task } from 'types/task';
+import { File as DbFile, Projeto, Task } from 'types/task';
 import FileViewerModal from 'components/FileViewerModal';
 import EditFileModal from 'components/EditFileModal';
 
 type FilesTableProps = {
-  files: File[];
+  files: DbFile[];
   selectedFilesIds: string[];
   toggleFileSelection: (fileId: string) => void;
-  handleFileClick: (file: File) => void;
-  handleEditFile: (file: File) => void;
-  handleDelete: (file: File) => void;
+  handleFileClick: (file: DbFile) => void;
+  handleEditFile: (file: DbFile) => void;
+  handleDelete: (file: DbFile) => void;
 };
 
 const FilesTable = ({ files, selectedFilesIds, toggleFileSelection, handleFileClick, handleEditFile, handleDelete }: FilesTableProps) => {
@@ -78,10 +78,10 @@ const FilesTable = ({ files, selectedFilesIds, toggleFileSelection, handleFileCl
 };
 
 type FilesGridProps = {
-  files: File[];
+  files: DbFile[];
   selectedFilesIds: string[];
   toggleFileSelection: (fileId: string) => void;
-  handleFileClick: (file: File) => void;
+  handleFileClick: (file: DbFile) => void;
 };
 
 const FilesGrid = ({ files, selectedFilesIds, toggleFileSelection, handleFileClick }: FilesGridProps) => {
@@ -127,7 +127,7 @@ const FilesGrid = ({ files, selectedFilesIds, toggleFileSelection, handleFileCli
 export default function FilesPage() {
   const { status } = useSession();
 
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<DbFile[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -136,7 +136,7 @@ export default function FilesPage() {
   const [projetosLoading, setProjetosLoading] = useState(true);
   const [tasksLoading, setTasksLoading] = useState(false);
 
-  const [editingFile, setEditingFile] = useState<File | null>(null);
+  const [editingFile, setEditingFile] = useState<DbFile | null>(null);
 
   const [selectedProjetoId, setSelectedProjetoId] = useState<string>('');
   const [selectedTaskId, setSelectedTaskId] = useState<string>('');
@@ -144,7 +144,7 @@ export default function FilesPage() {
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
 
   const [showFileModal, setShowFileModal] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFile, setSelectedFile] = useState<DbFile | null>(null);
 
   const [filesToUpload, setFilesToUpload] = useState<File[]>([]);
   const [isFileUploading, setIsFileUploading] = useState(false);
@@ -209,7 +209,7 @@ export default function FilesPage() {
 
       const res = await fetch(url);
       if (!res.ok) throw new Error('Falha ao buscar arquivos.');
-      const data: File[] = await res.json();
+      const data: DbFile[] = await res.json();
       setFiles(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro desconhecido');
@@ -222,7 +222,7 @@ export default function FilesPage() {
     if (status === 'authenticated') fetchFiles();
   }, [status, selectedProjetoId, selectedTaskId, fetchFiles]);
 
-  const handleFileClick = (file: File) => {
+  const handleFileClick = (file: DbFile) => {
     setSelectedFile(file);
     setShowFileModal(true);
   };
@@ -276,7 +276,7 @@ export default function FilesPage() {
     }
   };
 
-  const handleEditFile = async (file: File) => {
+  const handleEditFile = async (file: DbFile) => {
     setEditingFile(file);
 
     if (file.projeto?.id) {
