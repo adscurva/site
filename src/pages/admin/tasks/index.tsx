@@ -196,40 +196,53 @@ export default function TasksPage() {
     e.currentTarget.classList.remove('bg-orange-100', 'border-orange-500'); // Remove feedback visual
   };
 
-  const handleDragEndDndKit = (event: DragEndEvent) => {
+  const handleDragEndDndKit = async (event: DragEndEvent) => {
     const { active, over } = event;
-    if (!over) return;
 
-    const taskId = active.id as string;
+    if (!over || active.id === over.id) return;
+
+    // Busca a tarefa arrastada
+    const taskToMove = tasks.find(t => t.id === active.id);
+    if (!taskToMove) return;
+
+    // Determina o novo status com base na coluna de destino
     const newStatus = over.id as TaskStatusEnum;
 
-    const taskToMove = tasks.find(t => t.id === taskId);
-    if (!taskToMove || taskToMove.status === newStatus) return;
+    if (taskToMove.status === newStatus) return; // nada mudou
 
-    // Atualiza frontend
-    setTasks(prev => prev.map(t => t.id === taskId ? { ...t, status: newStatus } : t));
+    // Atualiza localmente
+    setTasks(prev =>
+      prev.map(t => (t.id === taskToMove.id ? { ...t, status: newStatus } : t))
+    );
 
-    // Atualiza backend
-    fetch(`/api/tasks/${taskId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: taskToMove.title,
-        description: taskToMove.description,
-        status: newStatus,
-        priority: taskToMove.priority,
-        dueDate: taskToMove.dueDate,
-        assignedToId: taskToMove.assignedToId,
-        authorId: taskToMove.authorId,
-        projetoId: taskToMove.projetoId,
-      }),
-    }).then(res => {
-      if (!res.ok) {
-        setTasks(prev => prev.map(t => t.id === taskId ? { ...t, status: taskToMove.status } : t));
-      }
-    });
+    // Atualiza no backend
+    try {
+      const response = await fetch(`/api/tasks/${taskToMove.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: taskToMove.title,
+          description: taskToMove.description,
+          status: newStatus, // ✅ envia o valor correto
+          priority: taskToMove.priority,
+          dueDate: taskToMove.dueDate,
+          assignedToId: taskToMove.assignedToId,
+          authorId: taskToMove.authorId,
+          projetoId: taskToMove.projetoId,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Falha ao atualizar a tarefa.");
+    } catch (err) {
+      console.error(err);
+      // Reverte o status se der erro
+      setTasks(prev =>
+        prev.map(t =>
+          t.id === taskToMove.id ? { ...t, status: taskToMove.status } : t
+        )
+      );
+    }
   };
-  // --- Fim das Funções de Drag and Drop ---
 
   if (error) {
     return (
@@ -384,12 +397,15 @@ export default function TasksPage() {
                   items={kanbanColumns[statusColumn].map(t => t.id)}
                   strategy={rectSortingStrategy}
                 >
-                  <div className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]">
+                  <div
+                    className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]"
+                    id={statusColumn} // importante: id da coluna = TaskStatusEnum
+                  >
                     <h2 className="text-lg font-bold text-gray-700 mb-4">
-                      {statusColumn.replace(/_/g, ' ')} ({kanbanColumns[statusColumn].length})
+                      {statusColumn.replace(/_/g, " ")} ({kanbanColumns[statusColumn].length})
                     </h2>
                     <div className="space-y-4">
-                      {kanbanColumns[statusColumn].map(task => (
+                      {kanbanColumns[statusColumn].map((task) => (
                         <TaskCard
                           key={task.id}
                           task={task}
