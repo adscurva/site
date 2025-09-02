@@ -203,7 +203,8 @@ export default function TasksPage() {
     const taskToMove = tasks.find((t) => t.id === active.id);
     if (!taskToMove) return;
 
-    const newStatus = over.id as TaskStatusEnum; // ✅ Deve ser a string literal do enum
+    // O id da coluna é a string do enum
+    const newStatus = over.id as TaskStatusEnum;
     if (taskToMove.status === newStatus) return;
 
     // Atualiza localmente
@@ -219,7 +220,7 @@ export default function TasksPage() {
         body: JSON.stringify({
           title: taskToMove.title,
           description: taskToMove.description,
-          status: newStatus, // ✅ agora é a string correta: PENDENTE, EM_ANDAMENTO ou CONCLUIDA
+          status: newStatus, // ✅ agora envia PENDENTE, EM_ANDAMENTO ou CONCLUIDA
           priority: taskToMove.priority,
           dueDate: taskToMove.dueDate,
           assignedToId: taskToMove.assignedToId,
@@ -388,29 +389,33 @@ export default function TasksPage() {
           <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEndDndKit}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {Object.values(TaskStatusEnum).map((statusColumn) => (
-                <div
+                <SortableContext
                   key={statusColumn}
-                  id={statusColumn} // ✅ importante: id da coluna = string do status
-                  className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]"
+                  items={kanbanColumns[statusColumn].map((t) => t.id)}
+                  strategy={rectSortingStrategy}
                 >
-                  <h2>{statusColumn.replace(/_/g, " ")}</h2>
-
-                  <SortableContext
-                    items={kanbanColumns[statusColumn].map((t) => t.id)}
-                    strategy={rectSortingStrategy}
+                  <div
+                    id={statusColumn} // importantíssimo: o id da coluna = string do status
+                    className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]"
                   >
-                    {kanbanColumns[statusColumn].map((task) => (
-                      <TaskCard
-                        key={task.id}
-                        task={task}
-                        onOpenDetail={openDetailModal}
-                        onOpenEdit={openEditModal}
-                        getPriorityColor={getPriorityColor}
-                        getPriorityText={getPriorityText}
-                      />
-                    ))}
-                  </SortableContext>
-                </div>
+                    <h2 className="text-lg font-bold text-gray-700 mb-4">
+                      {statusColumn.replace(/_/g, " ")} ({kanbanColumns[statusColumn].length})
+                    </h2>
+
+                    <div className="space-y-4">
+                      {kanbanColumns[statusColumn].map((task) => (
+                        <TaskCard
+                          key={task.id}
+                          task={task}
+                          getPriorityColor={getPriorityColor}
+                          getPriorityText={getPriorityText}
+                          onOpenDetail={openDetailModal}
+                          onOpenEdit={openEditModal}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </SortableContext>
               ))}
             </div>
           </DndContext>
