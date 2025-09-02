@@ -7,29 +7,6 @@ import prisma from '../../../../lib/prisma'; // ATENÇÃO: Ajuste este caminho s
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getServerSession(req, res, authOptions);
 
-  console.log(`\n--- [API /api/tasks/index] INICIO DA REQUISICAO ---`);
-  console.log(`[API /api/tasks/index] Método: ${req.method}`);
-  console.log(`[API /api/tasks/index] Requisição Host: ${req.headers.host}`);
-  console.log(`[API /api/tasks/index] Requisição Origin: ${req.headers.origin}`);
-  console.log(`[API /api/tasks/index] Variável de Ambiente NEXTAUTH_URL no runtime da API: ${process.env.NEXTAUTH_URL}`);
-  console.log(`[API /api/tasks/index] Variável de Ambiente NEXTAUTH_SECRET no runtime da API (início/fim): ${process.env.NEXTAUTH_SECRET ? `${process.env.NEXTAUTH_SECRET.substring(0, 5)}...${process.env.NEXTAUTH_SECRET.slice(-5)}` : "NÃO DEFINIDO"}`);
-  console.log(`[API /api/tasks/index] Cookies da Requisição: ${req.headers.cookie || 'Nenhum cookie presente'}`);
-  console.log(`[API /api/tasks/index] Sessão Recebida (JSON):`, JSON.stringify(session, null, 2));
-  if (session) {
-    console.log(`[API /api/tasks/index] User ID na sessão:`, session.user?.id);
-    console.log(`[API /api/tasks/index] User Role na sessão:`, (session.user as any)?.role);
-    console.log(`[API /api/tasks/index] Tipo da User Role:`, typeof (session.user as any)?.role);
-  } else {
-    console.log(`[API /api/tasks/index] Sessão ausente para a requisição.`);
-  }
-  console.log(`--- [API /api/tasks/index] FIM DOS LOGS DE SESSAO ---\n`);
-
-
-  if (!session || (session.user as any)?.role !== 'ADMIN') {
-    console.warn(`[API /api/tasks/index] Acesso NEGADO para ${req.method}. Motivo: ${!session ? 'Sessão Ausente' : `Role: ${(session?.user as any)?.role} (não é ADMIN)`}`);
-    return res.status(401).json({ message: 'Acesso não autorizado. Apenas administradores podem realizar esta operação.' });
-  }
-
   if (req.method === 'GET') {
     try {
       const { projetoId } = req.query; // Pega o projetoId da query string

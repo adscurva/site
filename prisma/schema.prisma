@@ -58,6 +58,7 @@ model User {
   filesUploaded     File[]
   messagesSent      Message[]
   commentsAuthored  Comment[] @relation("CommentAuthor") // NOVO: Comentários feitos pelo usuário
+  accessibleFiles File[] @relation("FileAccess")
 }
 
 model VerificationToken {
@@ -228,9 +229,15 @@ model File {
   task         Task?     @relation(fields: [taskId], references: [id])
   taskId       String?
 
-  // NOVO: Relacionamento com o projeto ao qual o arquivo pertence (opcional)
-  projeto      Projetos? @relation(fields: [projetoId], references: [id]) // Use 'Projetos' conforme seu arquivo 'projetos.ts'
+  // Relacionamento com o projeto ao qual o arquivo pertence (opcional)
+  projeto      Projetos? @relation(fields: [projetoId], references: [id])
   projetoId    String?
+
+  // NOVO: público ou privado
+  isPublic     Boolean   @default(true)
+
+  // NOVO: usuários que têm permissão para acessar o arquivo (se privado)
+  allowedUsers User[]    @relation("FileAccess")
 
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt

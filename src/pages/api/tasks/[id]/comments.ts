@@ -59,7 +59,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     case 'POST':
       const sessionPost = await getServerSession(req, res, authOptions);
-      if (!sessionPost || (sessionPost.user as any)?.role !== 'ADMIN') {
+      
+      if (!sessionPost) {
         console.warn(`[API /api/tasks/${taskId}/comments] Acesso NEGADO para POST. Motivo: ${!sessionPost ? 'Sessão Ausente' : `Role: ${(sessionPost?.user as any)?.role} (não é ADMIN)`}`);
         return res.status(401).json({ message: 'Acesso não autorizado. Apenas administradores podem adicionar comentários.' });
       }

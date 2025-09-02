@@ -1,4 +1,4 @@
-// pages/api/files/index.ts (ou pages/api/files.ts)
+// pages/api/files/index.ts
 
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
@@ -18,13 +18,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'POST':
       // Lógica para CRIAR um novo registro de arquivo
       {
-        // Verifica se o usuário é ADMIN (como você mencionou a restrição em TaskDetailModal)
-        // Se a criação de arquivos gerais puder ser feita por USER, remova esta verificação ou ajuste.
-        if ((session.user as any)?.role !== 'ADMIN') {
-          console.warn(`[API /api/files] Acesso NEGADO para POST. Motivo: Role: ${(session.user as any)?.role} (não é ADMIN)`);
-          return res.status(403).json({ message: 'Acesso negado. Apenas administradores podem adicionar arquivos.' });
-        }
-
         const { url, filename, mimetype, taskId, projetoId } = req.body;
 
         // Validação dos dados essenciais
@@ -100,6 +93,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           console.error(`[API /api/files] Erro ao buscar arquivos:`, error);
           return res.status(500).json({ message: 'Erro interno do servidor ao buscar arquivos.' });
         }
+      }
+
+    case 'DELETE':
+      if ((session.user as any)?.role !== 'ADMIN') {
+        return res.status(403).json({ message: 'Acesso negado' });
+      }
+      try {
+        const { fileId } = req.body; // espera receber o ID do arquivo
+        if (!fileId) {
+          return res.status(400).json({ message: 'ID do arquivo é obrigatório.' });
+        }
+        await prisma.file.delete({ where: { id: fileId } });
+        return res.status(200).json({ message: 'Arquivo excluído com sucesso' });
+      } catch (err) {
+        console.error('[API /api/files] Erro ao excluir arquivo:', err);
+        return res.status(500).json({ message: 'Erro ao excluir arquivo', error: err });
       }
 
     default:

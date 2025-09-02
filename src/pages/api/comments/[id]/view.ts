@@ -90,7 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
 
             // Verifica se o usuário logado é o autor OU um ADMIN
-            if (existingComment.authorId !== userId && (session.user as any)?.role !== 'ADMIN') {
+            if (existingComment.authorId !== userId) {
                 return res.status(403).json({ message: 'Proibido. Você não tem permissão para editar este comentário.' });
             }
 
@@ -124,7 +124,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
 
             // Verifica se o usuário logado é o autor OU um ADMIN
-            if (existingComment.authorId !== userId && (session.user as any)?.role !== 'ADMIN') {
+            if (existingComment.authorId !== userId) {
                 return res.status(403).json({ message: 'Proibido. Você não tem permissão para excluir este comentário.' });
             }
 

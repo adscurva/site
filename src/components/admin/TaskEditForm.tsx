@@ -126,12 +126,6 @@ const TaskEditForm: React.FC<TaskEditFormProps> = ({ taskId, onClose, onTaskUpda
         setLoading(true);
         setError(null);
 
-        if (status !== 'authenticated' || (session?.user as any)?.role !== 'ADMIN') {
-            setError('Acesso não autorizado para atualizar a tarefa.');
-            setLoading(false);
-            return;
-        }
-
         try {
             console.log('[TaskEditForm] Enviando dados para atualização da tarefa:', formData);
             const response = await fetch(`/api/tasks/${taskId}`, {
@@ -307,8 +301,8 @@ const TaskEditForm: React.FC<TaskEditFormProps> = ({ taskId, onClose, onTaskUpda
                         </button>
                         <button
                             type="submit"
-                            disabled={loading || dataLoading || status !== 'authenticated' || (session && (session.user as any)?.role !== 'ADMIN')}
-                            className={`py-2 px-4 rounded-md font-bold transition duration-300 ${loading || dataLoading || status !== 'authenticated' || (session && (session.user as any)?.role !== 'ADMIN') ? 'bg-gray-400 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'} text-white`}
+                            disabled={loading || dataLoading || status !== 'authenticated'}
+                            className={`py-2 px-4 rounded-md font-bold transition duration-300 ${loading || dataLoading || status !== 'authenticated' ? 'bg-gray-400 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'} text-white`}
                         >
                             {loading ? 'Atualizando...' : 'Salvar Alterações'}
                         </button>

@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import AdminLayout from 'components/admin/AdminLayout';
 import { GetServerSideProps } from 'next';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 import { useState, FormEvent, useEffect } from 'react';
 
 interface Testimonial {
@@ -55,6 +57,7 @@ const getToken = () => {
 };
 
 export default function Testimonials({ testimonials }: TestimonialsPageProps) {
+  const { data: session, status } = useSession();
   const [testimonialList, setTestimonialList] = useState(testimonials);
   const [editing, setEditing] = useState<Testimonial | null>(null);
   const [form, setForm] = useState({ name: '', type: 'texto', content: '' });
@@ -201,6 +204,16 @@ export default function Testimonials({ testimonials }: TestimonialsPageProps) {
     setEditing(testimonial);
   };
 
+  if (status === 'loading') return <AdminLayout><p>Verificando autenticação...</p></AdminLayout>;
+  if ((status === 'authenticated' && (session?.user as any)?.role !== 'ADMIN')) {
+    return (
+      <AdminLayout>
+        <p className="text-red-500 text-center mt-8">Acesso negado. Apenas administradores podem visualizar os arquivos.</p>
+        <Link href="/api/auth/signin" className="text-center block mt-4 text-orange-500 font-bold">Fazer Login</Link>
+      </AdminLayout>
+    );
+  }
+
   return (
     <AdminLayout>
       <div className="container mx-auto p-4">
@@ -264,7 +277,7 @@ export default function Testimonials({ testimonials }: TestimonialsPageProps) {
                 />
               )}
             </div>
-            
+
             <div className="flex justify-end space-x-2">
               <button
                 type="submit"
@@ -288,7 +301,7 @@ export default function Testimonials({ testimonials }: TestimonialsPageProps) {
 
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4">Depoimentos Existentes</h2>
-          
+
           {(testimonialList && testimonialList.length > 0) ? (
             <ul className="space-y-4">
               {testimonialList.map((testimonial: Testimonial) => (

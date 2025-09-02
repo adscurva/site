@@ -1,16 +1,17 @@
+// pages/api/upload.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import { v2 as cloudinary } from 'cloudinary';
 import { IncomingForm } from 'formidable';
 import fs from 'fs';
 
-// Configure o Cloudinary com suas credenciais de forma segura
+// Configuração do Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Desabilita o bodyParser padrão do Next.js para lidar com uploads de arquivos
+// Desabilita bodyParser do Next.js
 export const config = {
   api: {
     bodyParser: false,
@@ -25,11 +26,13 @@ export default async function upload(req: NextApiRequest, res: NextApiResponse) 
     return res.status(405).json({ message: 'Método não permitido' });
   }
 
-  const form = new IncomingForm();
+  // Formidable para lidar com upload de arquivos grandes
+  const form = new IncomingForm({
+    maxFileSize: 500 * 1024 * 1024, // 500 MB
+  });
 
   try {
-    // Processa o formulário para extrair campos e arquivos
-    const { fields, files } = await new Promise<{ fields: any, files: any }>((resolve, reject) => {
+    const { fields, files } = await new Promise<{ fields: any; files: any }>((resolve, reject) => {
       form.parse(req, (err, fields, files) => {
         if (err) {
           console.error('Erro ao fazer o parse do formulário:', err);
@@ -41,41 +44,45 @@ export default async function upload(req: NextApiRequest, res: NextApiResponse) 
 
     console.log('Formulário processado. Arquivos encontrados:', files);
 
-    // Acessa o arquivo. Em `formidable` v3+, `files` é um objeto onde as chaves são os nomes dos campos
-    // e os valores são arrays de objetos de arquivo ou um único objeto de arquivo.
     const file = Array.isArray(files.file) ? files.file[0] : files.file;
 
     if (!file || !file.filepath) {
-      console.error('Erro: Nenhum arquivo encontrado no formulário ou filepath ausente.');
+      console.error('Nenhum arquivo encontrado ou filepath ausente.');
       return res.status(400).json({ message: 'Nenhum arquivo enviado ou inválido.' });
     }
 
-    console.log(`Arquivo recebido: ${file.originalFilename} (tipo: ${file.mimetype}). Tamanho temporário em: ${file.filepath}`);
+    console.log(`Arquivo recebido: ${file.originalFilename} (tipo: ${file.mimetype}).`);
 
-    // Faz o upload do arquivo temporário para o Cloudinary
+    // Determina o tipo de recurso para o Cloudinary
+    const resourceType = file.mimetype.startsWith('video/')
+      ? 'video'
+      : file.mimetype === 'application/pdf'
+        ? 'raw' // PDFs e outros arquivos não suportados como imagem
+        : 'auto'; // imagens
+
+    // Upload para o Cloudinary
     const uploadResult = await cloudinary.uploader.upload(file.filepath, {
-      folder: 'dresses', // Mantém a pasta 'dresses' conforme seu código original
+      folder: 'dresses',
+      resource_type: resourceType,
     });
 
     console.log('Upload para o Cloudinary bem-sucedido. URL:', uploadResult.secure_url);
 
-    // Exclui o arquivo temporário após o upload
+    // Remove arquivo temporário
     fs.unlinkSync(file.filepath);
     console.log('Arquivo temporário excluído:', file.filepath);
 
-    // Retorna a URL segura, o nome ORIGINAL do arquivo e o tipo MIME
-    // Estes são os dados que a modal espera para salvar no banco de dados
+    // Retorna dados para o front-end
     return res.status(200).json({
       url: uploadResult.secure_url,
-      filename: file.originalFilename, // Adicionado: nome original do arquivo
-      mimetype: file.mimetype,       // Adicionado: tipo MIME do arquivo
+      filename: file.originalFilename,
+      mimetype: file.mimetype,
     });
-
-  } catch (uploadErr: any) {
-    console.error('Erro geral no processo de upload na API:', uploadErr); // Log do erro completo
+  } catch (err: any) {
+    console.error('Erro geral no upload:', err);
     return res.status(500).json({
-      message: 'Erro interno do servidor ao processar o upload do arquivo.',
-      error: uploadErr.message || 'Erro desconhecido durante o upload.',
+      message: 'Erro interno do servidor ao processar o upload.',
+      error: err.message || 'Erro desconhecido',
     });
   } finally {
     console.log('--- Fim da API de upload ---');

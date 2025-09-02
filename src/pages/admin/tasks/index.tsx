@@ -66,11 +66,6 @@ export default function TasksPage() {
       setError('Você precisa estar autenticado para visualizar as tarefas.');
       return;
     }
-    if ((session.user as any)?.role !== 'ADMIN') {
-      setLoading(false);
-      setError('Acesso negado. Apenas administradores podem visualizar as tarefas.');
-      return;
-    }
 
     try {
       setLoading(true);
@@ -278,35 +273,6 @@ export default function TasksPage() {
     }
   };
   // --- Fim das Funções de Drag and Drop ---
-
-
-  if (status === 'loading') {
-    return (
-      <AdminLayout>
-        <div className="flex justify-center items-center h-screen">
-          <p>Verificando autenticação...</p>
-        </div>
-      </AdminLayout>
-    );
-  }
-
-  // Se o usuário não estiver autenticado OU não for ADMIN, mostra mensagem de acesso negado
-  if (status === 'unauthenticated' || (status === 'authenticated' && (session?.user as any)?.role !== 'ADMIN')) {
-    return (
-      <AdminLayout>
-        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] text-center text-red-500 p-4">
-          <p className="text-2xl font-bold mb-4">Acesso Não Autorizado!</p>
-          <p className="text-lg">Você não tem permissão para visualizar ou gerenciar tarefas.</p>
-          <p className="text-gray-600 mt-4">
-            Por favor, verifique suas credenciais ou entre em contato com o administrador.
-          </p>
-          <Link href="/api/auth/signin" className="mt-6 inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md transition duration-300 shadow-md">
-            Fazer Login
-          </Link>
-        </div>
-      </AdminLayout>
-    );
-  }
 
   if (error) {
     return (

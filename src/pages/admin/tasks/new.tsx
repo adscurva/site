@@ -116,11 +116,6 @@ export default function NewTaskPage() {
       setError('Você precisa estar logado para criar tarefas.');
       return;
     }
-    if ((session.user as any)?.role !== 'ADMIN') {
-      setError('Acesso negado. Apenas administradores podem criar tarefas.');
-      setLoading(false);
-      return;
-    }
 
 
     setLoading(true);
@@ -162,24 +157,6 @@ export default function NewTaskPage() {
       <AdminLayout>
         <div className="container mx-auto p-4 md:p-8 text-center text-gray-500">
           <p>Carregando...</p>
-        </div>
-      </AdminLayout>
-    );
-  }
-
-  // Se o usuário não estiver autenticado OU não for ADMIN, mostra mensagem de acesso negado
-  if (status === 'unauthenticated' || (session && (session.user as any)?.role !== 'ADMIN')) {
-    return (
-      <AdminLayout>
-        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] text-center text-red-500 p-4">
-          <p className="text-2xl font-bold mb-4">Acesso Não Autorizado!</p>
-          <p className="text-lg">Você não tem permissão para criar novas tarefas.</p>
-          <p className="text-gray-600 mt-4">
-            Por favor, verifique suas credenciais ou entre em contato com o administrador.
-          </p>
-          <Link href="/admin/tasks" className="mt-6 inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md transition duration-300 shadow-md">
-            Voltar para a lista de tarefas
-          </Link>
         </div>
       </AdminLayout>
     );
@@ -319,8 +296,8 @@ export default function NewTaskPage() {
             <div className="flex justify-end">
               <button
                 type="submit"
-                disabled={loading || usersLoading || projetosLoading || status !== 'authenticated' || (session && (session.user as any)?.role !== 'ADMIN')}
-                className={`py-2 px-4 rounded-md font-bold transition duration-300 ${loading || usersLoading || projetosLoading || status !== 'authenticated' || (session && (session.user as any)?.role !== 'ADMIN') ? 'bg-gray-400 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'} text-white`}
+                disabled={loading || usersLoading || projetosLoading || status !== 'authenticated'}
+                className={`py-2 px-4 rounded-md font-bold transition duration-300 ${loading || usersLoading || projetosLoading || status !== 'authenticated' ? 'bg-gray-400 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'} text-white`}
               >
                 {loading ? 'Criando...' : 'Criar Tarefa'}
               </button>

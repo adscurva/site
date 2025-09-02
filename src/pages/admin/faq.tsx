@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import AdminLayout from 'components/admin/AdminLayout';
 import { GetServerSideProps } from 'next';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 import { useState, FormEvent, useEffect } from 'react';
 
 interface FAQ {
@@ -29,12 +31,13 @@ export const getServerSideProps: GetServerSideProps<FaqPageProps> = async () => 
   return {
     props: {
       // Garante que o objeto retornado é serializável (para evitar erros em produção)
-      faqs: JSON.parse(JSON.stringify(faqs)), 
+      faqs: JSON.parse(JSON.stringify(faqs)),
     },
   };
 };
 
 const FaqPage = ({ faqs }: FaqPageProps) => {
+  const { data: session, status } = useSession();
   const [faqList, setFaqList] = useState(faqs);
   const [pergunta, setPergunta] = useState('');
   const [resposta, setResposta] = useState('');
@@ -52,7 +55,7 @@ const FaqPage = ({ faqs }: FaqPageProps) => {
     setError(null);
 
     const method = editId ? 'PUT' : 'POST';
-    const url = '/api/crud/faqs'; 
+    const url = '/api/crud/faqs';
     const body = JSON.stringify({
       id: editId,
       pergunta,
@@ -112,12 +115,22 @@ const FaqPage = ({ faqs }: FaqPageProps) => {
     setEditId(faq.id);
   };
 
+  if (status === 'loading') return <AdminLayout><p>Verificando autenticação...</p></AdminLayout>;
+  if ((status === 'authenticated' && (session?.user as any)?.role !== 'ADMIN')) {
+    return (
+      <AdminLayout>
+        <p className="text-red-500 text-center mt-8">Acesso negado. Apenas administradores podem visualizar os arquivos.</p>
+        <Link href="/api/auth/signin" className="text-center block mt-4 text-orange-500 font-bold">Fazer Login</Link>
+      </AdminLayout>
+    );
+  }
+
   return (
     <AdminLayout>
       <h1 className="text-3xl font-bold mb-6">Gerenciar Perguntas Frequentes</h1>
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">{editId ? 'Editar FAQ' : 'Adicionar Nova FAQ'}</h2>
-        {error && <div className="bg-red-100 text-red-700 p-2 rounded mb-4">{error}</div>} 
+        {error && <div className="bg-red-100 text-red-700 p-2 rounded mb-4">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Pergunta</label>
