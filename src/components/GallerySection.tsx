@@ -152,22 +152,22 @@ export function GallerySection({
         galleryRef.current.scrollLeft = scrollLeft - walk;
     };
 
-    const handleShare = async (item: ColecaoItem, shareUrl: string) => {
-        if (isSharing) return;
+    // const handleShare = async (item: ColecaoItem, shareUrl: string) => {
+    //     if (isSharing) return;
 
-        setIsSharing(true);
-        try {
-            await navigator.share({
-                title: `Vestido ${item.productModel ?? ''}`,
-                text: `Confira este modelo incrível: ${item.productModel ?? ''} - ${item.productMark ?? ''}!`,
-                url: shareUrl,
-            });
-        } catch (error) {
-            console.error('Falha ao compartilhar:', error);
-        } finally {
-            setIsSharing(false);
-        }
-    };
+    //     setIsSharing(true);
+    //     try {
+    //         await navigator.share({
+    //             title: `Vestido ${item.productModel ?? ''}`,
+    //             text: `Confira este modelo incrível: ${item.productModel ?? ''} - ${item.productMark ?? ''}!`,
+    //             url: shareUrl,
+    //         });
+    //     } catch (error) {
+    //         console.error('Falha ao compartilhar:', error);
+    //     } finally {
+    //         setIsSharing(false);
+    //     }
+    // };
 
     if (!collection) {
         return <p className="text-center py-8">Coleção não encontrada.</p>;
@@ -294,7 +294,7 @@ export function GallerySection({
                                             <button
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    handleShare(item, shareUrl);
+                                                    // handleShare(item, shareUrl);
                                                 }}
                                                 className="inline-flex items-center justify-center bg-primary hover:bg-primary text-white rounded-full shadow-lg p-2 font-semibold text-sm transition-colors duration-300"
                                                 aria-label="Compartilhar"
