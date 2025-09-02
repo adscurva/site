@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const comments = await prisma.comment.findMany({
           where: { taskId },
           include: { author: { select: { id: true, name: true } } },
-          orderBy: { createdAt: "asc" },
+          orderBy: { createdAt: "desc" },
         });
 
         const commentsWithViewers = await Promise.all(
