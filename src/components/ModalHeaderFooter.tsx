@@ -35,11 +35,15 @@ export const ModalHeaderFooter = ({
 
         setIsSharing(true);
         try {
-            await navigator.share({
-                title: `Vestido ${productModel || ''}`,
-                text: `Confira este modelo incrível: ${productModel || ''} - ${productMark || ''}!`,
-                url: shareUrl,
-            });
+            if (navigator.share) {
+                await navigator.share({
+                    title: `Vestido ${productModel || ''}`,
+                    text: `Confira este modelo incrível: ${productModel || ''} - ${productMark || ''}!`,
+                    url: shareUrl,
+                });
+            } else {
+                alert("O compartilhamento não é suportado neste navegador.");
+            }
         } catch (error) {
             console.error('Falha ao compartilhar:', error);
         } finally {
