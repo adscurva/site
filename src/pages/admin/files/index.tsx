@@ -320,7 +320,8 @@ export default function FilesPage() {
     }
   };
 
-  const handleShareSelected = () => {
+  // --- Nova função para compartilhar ---
+  const handleShareSelected = async () => {
     if (selectedFilesIds.length === 0) return;
 
     const selectedFiles = files.filter(f => selectedFilesIds.includes(f.id));
@@ -328,17 +329,53 @@ export default function FilesPage() {
     const urlsWithCorrectNames = selectedFiles.map(f => {
       let filename = f.filename;
 
-      // Garante extensão correta
       if (
         (f.mimetype === 'application/pdf' && !filename.endsWith('.pdf')) ||
         (f.mimetype.startsWith('video/') && !filename.includes('.')) ||
         (f.mimetype.startsWith('image/') && !filename.includes('.'))
       ) {
-        const ext = f.mimetype.split('/')[1]; // pdf, jpeg, mp4, etc
+        const ext = f.mimetype.split('/')[1];
         filename += `.${ext}`;
       }
 
-      // Link absoluto com query param ?dl= para forçar nome correto ao baixar
+      return `${window.location.origin}/api/files/download/${f.id}?dl=${encodeURIComponent(filename)}`;
+    }).join('\n');
+
+    try {
+      if (navigator.share) {   // ✅ garante que não é undefined
+        await navigator.share({
+          title: `Arquivos compartilhados (${selectedFiles.length})`,
+          text: `Confira os arquivos relacionados ao projeto/tarefa:\n\n${selectedFiles
+            .map(f => `📎 ${f.filename}`)
+            .join('\n')}\n\n${urlsWithCorrectNames}`,
+          url: window.location.href, // ✅ só um URL pode ir aqui, o resto fica no text
+        });
+      } else {
+        alert("O compartilhamento não é suportado neste navegador.");
+      }
+    } catch (error) {
+      console.error('Falha ao compartilhar:', error);
+    }
+  };
+
+  // --- Função existente, renomeada ---
+  const handleCopySelected = () => {
+    if (selectedFilesIds.length === 0) return;
+
+    const selectedFiles = files.filter(f => selectedFilesIds.includes(f.id));
+
+    const urlsWithCorrectNames = selectedFiles.map(f => {
+      let filename = f.filename;
+
+      if (
+        (f.mimetype === 'application/pdf' && !filename.endsWith('.pdf')) ||
+        (f.mimetype.startsWith('video/') && !filename.includes('.')) ||
+        (f.mimetype.startsWith('image/') && !filename.includes('.'))
+      ) {
+        const ext = f.mimetype.split('/')[1];
+        filename += `.${ext}`;
+      }
+
       return `${window.location.origin}/api/files/download/${f.id}?dl=${encodeURIComponent(filename)}`;
     }).join('\n');
 
@@ -396,11 +433,19 @@ export default function FilesPage() {
         {/* Ações em massa */}
         {selectedFilesIds.length > 0 && (
           <div className="flex gap-2 mb-4">
+            {'share' in navigator && (
+              <button
+                onClick={handleShareSelected}
+                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              >
+                Compartilhar ({selectedFilesIds.length})
+              </button>
+            )}
             <button
-              onClick={handleShareSelected}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              onClick={handleCopySelected}
+              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
             >
-              Compartilhar ({selectedFilesIds.length})
+              Copiar para Transferência ({selectedFilesIds.length})
             </button>
             <button
               onClick={handleDeleteSelected}
