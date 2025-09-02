@@ -196,25 +196,45 @@ export default function TasksPage() {
     e.currentTarget.classList.remove('bg-orange-100', 'border-orange-500'); // Remove feedback visual
   };
 
-  const handleDragEndDndKit = async (taskId: string, newStatus: TaskStatusEnum) => {
-    const taskToMove = tasks.find((t) => t.id === taskId);
+  const handleDragEndDndKit = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over) return; // Se não houver target, aborta
+
+    // Procura a tarefa arrastada
+    const taskToMove = tasks.find((t) => t.id === active.id);
     if (!taskToMove) return;
+
+    // Verifica se over.id é um valor válido do enum
+    if (!Object.values(TaskStatusEnum).includes(over.id as TaskStatusEnum)) {
+      console.warn("handleDragEndDndKit: over.id não é um status válido:", over.id);
+      return;
+    }
+
+    const newStatus = over.id as TaskStatusEnum;
+
+    // Se o status não mudou, não faz nada
     if (taskToMove.status === newStatus) return;
 
-    // Atualiza localmente
+    console.log("handleDragEndDndKit: Alterando status", {
+      taskId: taskToMove.id,
+      oldStatus: taskToMove.status,
+      newStatus,
+    });
+
+    // Atualiza localmente imediatamente
     setTasks((prev) =>
       prev.map((t) => (t.id === taskToMove.id ? { ...t, status: newStatus } : t))
     );
 
     // Atualiza no backend
     try {
-      const res = await fetch(`/api/tasks/${taskToMove.id}`, {
+      const response = await fetch(`/api/tasks/${taskToMove.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: taskToMove.title,
           description: taskToMove.description,
-          status: newStatus,
+          status: newStatus, // ✅ Agora envia o enum correto
           priority: taskToMove.priority,
           dueDate: taskToMove.dueDate,
           assignedToId: taskToMove.assignedToId,
@@ -223,10 +243,10 @@ export default function TasksPage() {
         }),
       });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        console.error("API error:", errorData);
-        // Reverte status em caso de erro
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Erro na API:", errorData);
+        // Reverte localmente se a API falhar
         setTasks((prev) =>
           prev.map((t) =>
             t.id === taskToMove.id ? { ...t, status: taskToMove.status } : t
@@ -234,8 +254,11 @@ export default function TasksPage() {
         );
         throw new Error(errorData.message || "Falha ao atualizar status da tarefa.");
       }
+
+      console.log("Status atualizado com sucesso no backend:", newStatus);
     } catch (err) {
-      console.error("Erro ao atualizar status:", err);
+      console.error("Erro ao atualizar status via API:", err);
+      setError(err instanceof Error ? err.message : "Erro inesperado.");
     }
   };
 
@@ -384,47 +407,37 @@ export default function TasksPage() {
             )}
           </div>
         ) : (
-          <DndContext collisionDetection={closestCenter}>
+          <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEndDndKit}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {Object.values(TaskStatusEnum).map((statusColumn) => (
-                <SortableContext
+                <div
                   key={statusColumn}
-                  items={kanbanColumns[statusColumn].map((t) => t.id)}
-                  strategy={rectSortingStrategy}
+                  id={statusColumn} // ✅ importante: id da coluna = string do enum
+                  className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]"
                 >
-                  <div
-                    id={statusColumn}
-                    className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]"
-                  >
-                    <h2 className="text-lg font-bold text-gray-700 mb-4">
-                      {statusColumn.replace(/_/g, " ")} ({kanbanColumns[statusColumn].length})
-                    </h2>
+                  <h2 className="text-lg font-bold text-gray-700 mb-4">
+                    {statusColumn.replace(/_/g, ' ')} ({kanbanColumns[statusColumn].length})
+                  </h2>
 
-                    <div className="space-y-4">
-                      {kanbanColumns[statusColumn].length === 0 ? (
-                        <div className="text-center text-gray-500 p-4">
-                          Nenhuma tarefa nesta coluna.
-                        </div>
-                      ) : (
-                        kanbanColumns[statusColumn].map((task) => (
-                          <TaskCard
-                            key={task.id}
-                            task={task}
-                            getPriorityColor={getPriorityColor}
-                            getPriorityText={getPriorityText}
-                            onOpenDetail={openDetailModal}
-                            onOpenEdit={openEditModal}
-                            onDragEnd={(taskId) => handleDragEndDndKit(taskId, statusColumn)} // ✅ aqui passamos statusColumn
-                          />
-                        ))
-                      )}
-                    </div>
-                  </div>
-                </SortableContext>
+                  <SortableContext
+                    items={kanbanColumns[statusColumn].map((t) => t.id)}
+                    strategy={rectSortingStrategy}
+                  >
+                    {kanbanColumns[statusColumn].map((task) => (
+                      <TaskCard
+                        key={task.id}
+                        task={task}
+                        getPriorityColor={getPriorityColor}
+                        getPriorityText={getPriorityText}
+                        onOpenDetail={openDetailModal}
+                        onOpenEdit={openEditModal}
+                      />
+                    ))}
+                  </SortableContext>
+                </div>
               ))}
             </div>
           </DndContext>
-
         )}
       </div>
 
