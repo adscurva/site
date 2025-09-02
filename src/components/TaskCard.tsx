@@ -8,6 +8,7 @@ interface TaskCardProps {
     onOpenEdit: (task: Task) => void;
     getPriorityColor: (priority: number) => string;
     getPriorityText: (priority: number) => string;
+    onDragEnd?: (taskId: string) => Promise<void>; // ✅ NOVO: prop opcional para lidar com drag end
 }
 
 export function TaskCard({
@@ -16,9 +17,17 @@ export function TaskCard({
     onOpenEdit,
     getPriorityColor,
     getPriorityText,
+    onDragEnd, // ✅ recebe a prop
 }: TaskCardProps) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: task.id });
     const style = { transform: CSS.Transform.toString(transform), transition };
+
+    // Função interna para disparar onDragEnd
+    const handleDragEndInternal = async () => {
+        if (onDragEnd) {
+            await onDragEnd(task.id);
+        }
+    };
 
     return (
         <div
@@ -26,6 +35,7 @@ export function TaskCard({
             style={style}
             {...attributes}
             {...listeners}
+            onDragEnd={handleDragEndInternal} // ✅ dispara a função passada de fora
             className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-200 cursor-grab"
         >
             <h3 className="text-base font-semibold text-gray-900 truncate">{task.title}</h3>

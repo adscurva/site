@@ -196,15 +196,9 @@ export default function TasksPage() {
     e.currentTarget.classList.remove('bg-orange-100', 'border-orange-500'); // Remove feedback visual
   };
 
-  const handleDragEndDndKit = async (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over) return;
-
-    const taskToMove = tasks.find((t) => t.id === active.id);
+  const handleDragEndDndKit = async (taskId: string, newStatus: TaskStatusEnum) => {
+    const taskToMove = tasks.find((t) => t.id === taskId);
     if (!taskToMove) return;
-
-    // O id da coluna é a string do enum
-    const newStatus = over.id as TaskStatusEnum;
     if (taskToMove.status === newStatus) return;
 
     // Atualiza localmente
@@ -220,7 +214,7 @@ export default function TasksPage() {
         body: JSON.stringify({
           title: taskToMove.title,
           description: taskToMove.description,
-          status: newStatus, // ✅ agora envia PENDENTE, EM_ANDAMENTO ou CONCLUIDA
+          status: newStatus,
           priority: taskToMove.priority,
           dueDate: taskToMove.dueDate,
           assignedToId: taskToMove.assignedToId,
@@ -229,15 +223,19 @@ export default function TasksPage() {
         }),
       });
 
-      if (!res.ok) throw new Error("Falha ao atualizar status da tarefa.");
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error("API error:", errorData);
+        // Reverte status em caso de erro
+        setTasks((prev) =>
+          prev.map((t) =>
+            t.id === taskToMove.id ? { ...t, status: taskToMove.status } : t
+          )
+        );
+        throw new Error(errorData.message || "Falha ao atualizar status da tarefa.");
+      }
     } catch (err) {
-      console.error(err);
-      // Reverte status em caso de erro
-      setTasks((prev) =>
-        prev.map((t) =>
-          t.id === taskToMove.id ? { ...t, status: taskToMove.status } : t
-        )
-      );
+      console.error("Erro ao atualizar status:", err);
     }
   };
 
@@ -386,7 +384,7 @@ export default function TasksPage() {
             )}
           </div>
         ) : (
-          <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEndDndKit}>
+          <DndContext collisionDetection={closestCenter}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {Object.values(TaskStatusEnum).map((statusColumn) => (
                 <SortableContext
@@ -395,7 +393,7 @@ export default function TasksPage() {
                   strategy={rectSortingStrategy}
                 >
                   <div
-                    id={statusColumn} // importantíssimo: o id da coluna = string do status
+                    id={statusColumn}
                     className="bg-gray-100 p-4 rounded-lg shadow-md min-h-[300px]"
                   >
                     <h2 className="text-lg font-bold text-gray-700 mb-4">
@@ -403,22 +401,30 @@ export default function TasksPage() {
                     </h2>
 
                     <div className="space-y-4">
-                      {kanbanColumns[statusColumn].map((task) => (
-                        <TaskCard
-                          key={task.id}
-                          task={task}
-                          getPriorityColor={getPriorityColor}
-                          getPriorityText={getPriorityText}
-                          onOpenDetail={openDetailModal}
-                          onOpenEdit={openEditModal}
-                        />
-                      ))}
+                      {kanbanColumns[statusColumn].length === 0 ? (
+                        <div className="text-center text-gray-500 p-4">
+                          Nenhuma tarefa nesta coluna.
+                        </div>
+                      ) : (
+                        kanbanColumns[statusColumn].map((task) => (
+                          <TaskCard
+                            key={task.id}
+                            task={task}
+                            getPriorityColor={getPriorityColor}
+                            getPriorityText={getPriorityText}
+                            onOpenDetail={openDetailModal}
+                            onOpenEdit={openEditModal}
+                            onDragEnd={(taskId) => handleDragEndDndKit(taskId, statusColumn)} // ✅ aqui passamos statusColumn
+                          />
+                        ))
+                      )}
                     </div>
                   </div>
                 </SortableContext>
               ))}
             </div>
           </DndContext>
+
         )}
       </div>
 
